@@ -1,0 +1,56 @@
+﻿<Window x:Class="TestTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+         DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Style="{DynamicResource SkinWindowStyle}"
+        Title="Virtium - Test Tracker" 
+        Icon="Resources\Viritum-Logo.ico">
+    <Window.Resources>
+        <sys:String x:Key="strFilePath">C:\Program Files (x86)\ULINK DM2012 PRO NET\v950\DriveMaster.exe</sys:String>
+        <sys:String x:Key="strUlinkFolderPath">~\Desktop\ULINK_Protocol_v3.4_Virtium</sys:String>
+    </Window.Resources>
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Canvas HorizontalAlignment="Left">
+            <StackPanel Canvas.Top="5" Canvas.Left="20" >
+                <Label Content="ULINK TEST TRACKER"  Margin="4,4,4,4" FontSize="26"></Label>
+            </StackPanel>
+            <StackPanel Canvas.Top="65" Canvas.Left="20" Width="400" >
+                <Label Content="DriveMaster.exe Path" HorizontalAlignment="Left" Margin="4,4,4,4" VerticalAlignment="Top"/>
+                <DockPanel>
+                    <TextBox Name="_filePathTextBox" Width="276" Margin="4,4,4,4" Text="{StaticResource strFilePath}" HorizontalContentAlignment="Left" />
+                    <Button Width="80" HorizontalAlignment="Left" Margin="4,4,4,4" IsDefault="True" Content="Change" Click="ChangeFilePatch_Click" RenderTransformOrigin="1.643,0.5"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel Canvas.Top="130" Canvas.Left="20" Width="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <Label Name="_pathName" Content="ULINK Test Script Folder location:"  Margin="4,4,4,4"></Label>
+                <DockPanel>
+                    <TextBox Name="_folderPathTextBox" Width="276" Margin="4,4,4,4" Text="{StaticResource strUlinkFolderPath}" HorizontalContentAlignment="Left" />
+                    <Button Width="80" HorizontalAlignment="Left" Margin="4,4,4,4" IsDefault="True" Content="Change" Click="ChangeUlinkFolder_Click"/>
+                </DockPanel>
+                <DockPanel>
+                    <TreeView Name="_scriptFileTreeView" HorizontalAlignment="Left"  Height="450" Width="276"  Margin="4,4,4,4"></TreeView>
+                    <StackPanel>
+                        <Button Width="80" Name="_checkAllButton" VerticalAlignment="Top" Height="23" HorizontalAlignment="Left" Margin="4,24,4,4" IsDefault="True" Content="Check All" Click="ChechkAll_Click"/>
+                        <Button Width="80" Name="_unCheckedAllButton" VerticalAlignment="Top" Height="23" HorizontalAlignment="Left" FontSize="10" Margin="4,4,4,4" IsDefault="True" Content="UnChecked All" Click="UnCheckedAll_Click"/>
+                        <Button Width="80" VerticalAlignment="Top" Height="23" HorizontalAlignment="Left" FontSize="10" Margin="4,4,4,4" IsDefault="True" Content="Use Common"/>
+                        <Button Width="80" VerticalAlignment="Top" Height="23" HorizontalAlignment="Left" FontSize="10" Margin="4,4,4,4" IsDefault="True" Content="Use Bookmark"/>
+                        <Button Width="80" Name="_toogleExpandButton" VerticalAlignment="Top" Height="23" HorizontalAlignment="Left" FontSize="10" Margin="4,20,4,4" IsDefault="True" Content="Expand" Click="ToogleExpand_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </Canvas>
+        <Canvas HorizontalAlignment="Right">
+            <StackPanel  Width="400">
+            </StackPanel>
+        </Canvas>
+
+    </Grid>
+</Window>
