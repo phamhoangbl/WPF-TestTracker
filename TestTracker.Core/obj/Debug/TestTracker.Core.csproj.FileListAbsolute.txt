@@ -1,0 +1,5 @@
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\TestTracker.Core.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\TestTracker.Core.pdb
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.csprojResolveAssemblyReference.cache
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.pdb
