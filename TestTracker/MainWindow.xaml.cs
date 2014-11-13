@@ -18,6 +18,10 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
 using NLog;
+using TestTracker.Core.Data.Model;
+using TestTracker.Core.Data.Repository;
+using TestTracker.Core.Utils;
+
 namespace TestTracker
 {
     /// <summary>
@@ -25,8 +29,11 @@ namespace TestTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TestQueue _testQueueRunning = null;
         private Logger _logger;
-        public bool _isRun;
+        private bool _isClickRunTest;
+        private bool _isRunDMMaster;
+        private TimeSpan _timeSpan;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +41,7 @@ namespace TestTracker
 
             this.DataContext = this;
             _logger = LogManager.GetCurrentClassLogger();
+            TimeSpan span = TimeSpan.Zero;
         }
 
         private void ChangeFilePatch_Click(object sender, RoutedEventArgs e)
@@ -97,12 +105,9 @@ namespace TestTracker
 
         private void RunTest_Click(object sender, RoutedEventArgs e)
         {
-            _isRun = true;  
+            _isClickRunTest = true;  
             try
             {
-                //Create a test queue
-
-
                 SetUpTimer();
             }
             catch
@@ -298,56 +303,152 @@ namespace TestTracker
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (_isRun)
+            if (_isClickRunTest)
+            {
+                CreateTestQueue();
+            }
+            if (_isRunDMMaster)
             {
                 CallDmMaster();
             }
         }
 
-        private void CallDmMaster()
+        private void CreateTestQueue()
         {
-            _logger.Info("Begin call DM Master exe");
+            _logger.Info("Creating Test Queue");
             //TODO: validation here
-            string fileDMPatch = _filePathTextBox.Text;
             List<string> scriptNames = GetFilecriptNames();
             string[] platform = ((ComboBoxItem)this._platformCombobox.SelectedItem).Tag.ToString().Split('-');
             string verdorId = platform[0];
             string deviceId = platform[1];
             string port = ((ComboBoxItem)this._port.SelectedItem).Tag.ToString();
 
-            // Run Multi script Setup the process with the ProcessStartInfo class.
-            foreach (var script in scriptNames)
+            //Process Creating a test queue
+            foreach (var scriptName in scriptNames)
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = false;
-                startInfo.CreateNoWindow = true;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                startInfo.FileName = fileDMPatch;
-                startInfo.RedirectStandardOutput = true;
-                startInfo.Arguments = string.Format(@"/s:{0} /v:{1} /D:{2} /P:{3} /l:/e", script, verdorId, deviceId, port);
-                // Start the process with the info we specified.
-                // Call WaitForExit and then the using statement will close.
                 try
                 {
-                    using (Process process = Process.Start(startInfo))
+                    int testStuffId;
+                    var testStuffRepository = new TestStuffRepository();
+                    TestStuff hasAlready = testStuffRepository.Select(deviceId, verdorId, port);
+                    if (hasAlready == null)
                     {
-                        using (StreamReader reader = process.StandardOutput)
-                        {
-                            string result = reader.ReadToEnd();
-                            _logger.Info(string.Format("DM Master Output: {0}", result));
-                        }
+                        //create a test stuff
+                        TestStuff testStuff = new TestStuff();
+                        testStuff.DeviceId = deviceId;
+                        testStuff.VerdorId = verdorId;
+                        testStuff.Port = port;
+                        testStuff.ComputerName = System.Environment.MachineName;
+                        testStuffRepository.Insert(testStuff, out testStuffId);
                     }
+                    else
+                    {
+                        testStuffId = hasAlready.TestStuffId;
+                    }
+
+                    //create test queue
+                    var testQueueRepository = new TestQueueRepository();
+                    TestQueue testQueue = new TestQueue();
+                    testQueue.ScriptName = scriptName;
+                    testQueue.StartedTime = DateTime.UtcNow;
+                    testQueue.FinishedTime = null;
+                    testQueue.TestStuffId = testStuffId;
+                    testQueue.TestResultId = null;
+                    //if there is queue has running, then skip pending, if not then set status = running
+                    var hasRunning = testQueueRepository.HasRunning();
+                    if(hasRunning)
+                    {
+                        testQueue.TestStatusId = (int)EnumTestStatus.Pending;
+                    }
+                    else
+                    {
+                        testQueue.TestStatusId = (int)EnumTestStatus.Running;
+                    }
+                    testQueueRepository.Insert(testQueue);
                 }
                 catch(Exception ex)
                 {
-                    _logger.Error("Error exception when trying to call DM Master", ex);
+                    _logger.Error("Exception when creating a test queue", ex);
                 }
             }
-
-            _isRun = false;
-
+            _testQueueDataGrid.DataBind();
+            _isClickRunTest = false;
             LoadingAdorner.IsAdornerVisible = false;
             _mainForm.IsEnabled = true;
+            _isRunDMMaster = true;
+        }
+
+        private void CallDmMaster()
+        {
+            _logger.Info("Begin call DM Master exe");
+
+            try
+            {
+                //Run Script to defect device
+                RunScriptDefectDevice();
+                //Run Test Script User chosen
+                RunTestScript();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("error exception when trying to call dm master", ex);
+                if (ex.Message == "File script is not exist.")
+                {
+                    System.Windows.Forms.MessageBox.Show("File script is not exist");
+                }
+                System.Windows.Forms.MessageBox.Show("Error exception when trying to execute the file path, please check your network");
+                _isRunDMMaster = false;
+            }
+        }
+
+        private void RunTestScript()
+        {
+            // Run Multi script Setup the process with the ProcessStartInfo class.
+            // Retrieve Queues have status = Running
+            var testQueueRepository = new TestQueueRepository();
+            _testQueueRunning = testQueueRepository.SelectQueueRunning();
+            string fileDMPatch = _filePathTextBox.Text;
+
+            if (File.Exists(_testQueueRunning.ScriptName))
+            {
+
+                var testStuffRepository = new TestStuffRepository();
+                var testSuffRunning = testStuffRepository.SelectByID(_testQueueRunning.TestQueueId);
+
+                ProcessStartInfo startinfo = new ProcessStartInfo();
+                startinfo.UseShellExecute = false;
+                startinfo.CreateNoWindow = true;
+                startinfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startinfo.FileName = fileDMPatch;
+                startinfo.RedirectStandardOutput = true;
+
+                startinfo.Arguments = string.Format(@"/s:{0} /v:{1} /d:{2} /p:{3} /l:/e", _testQueueRunning.ScriptName, testSuffRunning.VerdorId, testSuffRunning.DeviceId, testSuffRunning.Port);
+
+                //start the process with the info we specified.
+                //call waitforexit and then the using statement will close.
+
+                using (Process process = Process.Start(startinfo))
+                {
+                    using (StreamReader reader = process.StandardOutput)
+                    {
+                        string result = reader.ReadToEnd();
+                        _logger.Info(string.Format("dm master output: {0}", result));
+
+                        //when done process, check file export: excels and logs
+
+                    }
+                }
+
+                _isRunDMMaster = false;
+            }
+            else
+            {
+                throw new Exception("File script is not exist.");
+            }
+        }
+
+        private void RunScriptDefectDevice()
+        {
         }
 
         #endregion

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="TestTracker.Controls.Grid.TestQueueDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestTracker.DataConverter"
+             mc:Ignorable="d" 
+             xmlns:l="clr-namespace:TestTracker.Controls.Grid" Width="773" Height="450"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:TestStatusConverter x:Key="ToTestStatusString" />
+        <local:ShortScriptNameConverter x:Key="ToShortScriptNameConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Label Content="gagag" Foreground="Red"></Label>
+        <DataGrid x:Name="_testQueueDataGrid" Background="#FF393939" BorderThickness="0" BorderBrush="DarkCyan"
+                  HeadersVisibility="Column" Foreground="WhiteSmoke" AutoGenerateColumns="False"
+            ItemsSource="{Binding TestQueues}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Script Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding ScriptName, Converter={StaticResource ToShortScriptNameConverter}}" ToolTip="{Binding ScriptName}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Status">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding TestStatusId, Converter={StaticResource ToTestStatusString}}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    Binding="{Binding Path=StartedTime}" Header="Started Time" />
+                <DataGridTextColumn
+                    Binding="{Binding Path=FinishedTime}" Header="Finished Time" />
+                <DataGridTextColumn
+                    Binding="{Binding Path=TestResultId}" Header="Result" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding ScriptName}" Foreground="Red" />
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </Grid>
+</UserControl>

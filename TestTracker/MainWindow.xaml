@@ -2,13 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:control="clr-namespace:LoadingControl.Control"
+        xmlns:control="clr-namespace:TestTracker.Controls.Loading"
         xmlns:ac="clr-namespace:AdornedControl;assembly=AdornedControl"
-         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="TestTracker.MainWindow"
-         DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="TestTracker.MainWindow"
+        xmlns:testQueueDataGrid="clr-namespace:TestTracker.Controls.Grid"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Style="{DynamicResource SkinWindowStyle}"
         Title="Virtium - Test Tracker" 
-        Icon="Resources\Viritum-Logo.ico" d:DesignWidth="1373.97" Height="700.671">
+        Icon="Resources\Viritum-Logo.ico" Width="1373" Height="700.671">
     <Window.Resources>
         <sys:String x:Key="strFilePath">C:\Program Files (x86)\ULINK DM2012 PRO NET\v950\DriveMaster.exe</sys:String>
         <!--<sys:String x:Key="strFilePath">C:\Users\johnhoang\Desktop\Watch.exe</sys:String>-->
@@ -104,6 +105,9 @@
                         </StackPanel>
                     </DockPanel>
                     <Button Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Run Test" Click="RunTest_Click" />
+                </StackPanel>
+                <StackPanel Canvas.Top="130" Canvas.Left="4">
+                    <testQueueDataGrid:TestQueueDataGrid x:Name="_testQueueDataGrid" ></testQueueDataGrid:TestQueueDataGrid>
                 </StackPanel>
             </Canvas>
 

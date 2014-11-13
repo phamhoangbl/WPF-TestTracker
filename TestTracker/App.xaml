@@ -11,6 +11,8 @@
                 <!-- Set default skin -->
                 <ResourceDictionary Source="Themes\Skins\ExpressionDark.xaml"/>
                 <ResourceDictionary Source="Themes\WindowStyle.xaml"/>
+                <ResourceDictionary Source="/TestTracker;component/Resources/DataGrid/ScrollViewerStyle.xaml" />
+                <ResourceDictionary Source="/TestTracker;component/Resources/DataGrid/DataGridStyle.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
             <common:SettingConverter x:Key="SettingConv"></common:SettingConverter >
