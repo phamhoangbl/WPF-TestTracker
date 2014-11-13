@@ -32,9 +32,9 @@ namespace TestTracker.Core.Data.Repository
              return db.TestStuffs.Find(id);
          }
 
-         public TestStuff Select(string deviceId, string verdorId, string port)
+         public TestStuff Select(string deviceId, string verdorId, string port, string computerName)
          {
-             return db.TestStuffs.SingleOrDefault(x => x.DeviceId == deviceId && x.VerdorId == verdorId && x.Port == port); 
+             return db.TestStuffs.SingleOrDefault(x => x.DeviceId == deviceId && x.VerdorId == verdorId && x.Port == port && x.ComputerName == computerName); 
          }
 
          public void Insert(TestStuff obj, out int testStuffId)

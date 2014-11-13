@@ -27,15 +27,15 @@ namespace TestTracker.Core.Data.Repository
          public IEnumerable<TestQueue> SelectAll()
          {
              //get queues of client computer 
-             var testStuff = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
-             return db.TestQueues.ToList().Where(x => testStuff.Contains(x.TestStuffId)).OrderBy(x=>x.TestQueueId);
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             return db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
          }
 
          public TestQueue SelectQueueRunning()
          {
              //get queues of client computer 
-             var testStuff = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
-             var testQueue = db.TestQueues.ToList().Where(x => testStuff.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
              return testQueue.Where(x => x.TestStatusId == 5).SingleOrDefault();
          }
 
@@ -68,7 +68,8 @@ namespace TestTracker.Core.Data.Repository
 
          public bool HasRunning()
          {
-             bool hasRunning = db.TestQueues.Any(x => x.TestStatusId == (int)EnumTestStatus.Running);
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             bool hasRunning = db.TestQueues.Any(x => x.TestStatusId == (int)EnumTestStatus.Running && testStuffId.Contains(x.TestStuffId));
              return hasRunning;
          }
     }

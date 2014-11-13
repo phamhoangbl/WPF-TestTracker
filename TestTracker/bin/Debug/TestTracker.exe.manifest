@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.7" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.17" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -97,19 +97,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LUd1NAn0hUa/7nJHSb2YOzfqb2HP0sf6e25KKCKf0bg=</dsig:DigestValue>
+        <dsig:DigestValue>ZvOz6KyD9nj1GEOUsWFfmFYke4/e9lN5gK0yjAm5wcw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="12800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="13312">
       <assemblyIdentity name="TestTracker.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iOe4DcVobCJTx784hgvu8BXV1Tcn42lz5C5HzIKY+lI=</dsig:DigestValue>
+        <dsig:DigestValue>r30Of45VJbJTuE4pF6iLHotOBA0WbTvgtMJZDczzCbM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,13 +122,13 @@
       <dsig:DigestValue>o9yNKUf4hwg6ilGkFdOIqP7nRF/VBK5fpqTF6d1VS6g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TestTracker.exe.config" size="1342">
+  <file name="TestTracker.exe.config" size="1362">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Yt+HX6NhQKf5pJQJ1pTIApM0uyxGo5ql80iavBFFP50=</dsig:DigestValue>
+      <dsig:DigestValue>SUPlDItA3yQq/HbjddiVHdZAafuD61Ebc9Qfi2sSrek=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

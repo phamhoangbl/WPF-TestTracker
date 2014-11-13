@@ -11,7 +11,7 @@ namespace TestTracker.Core.Data.Repository
     {
         IEnumerable<TestStuff> SelectAll();
         TestStuff SelectByID(int id);
-        TestStuff Select(string deviceId, string verdorId, string port);
+        TestStuff Select(string deviceId, string verdorId, string port, string computerName);
         void Insert(TestStuff obj, out int testStuffId);
         void Update(TestStuff obj);
         void Delete(string id);
