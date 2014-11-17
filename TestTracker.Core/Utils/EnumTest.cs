@@ -12,6 +12,7 @@ namespace TestTracker.Core.Utils
         Completed = 2,
         Uncompleted = 3,
         Stoped = 4,
-        Running = 5
+        Running = 5,
+        Processing = 6
     };
 }

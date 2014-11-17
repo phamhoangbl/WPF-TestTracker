@@ -29,7 +29,7 @@
     <PublisherName>John Hoang</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -113,6 +113,9 @@
     <Compile Include="Controls\Grid\TestQueueDataGrid.xaml.cs">
       <DependentUpon>TestQueueDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Messagebox\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataConverter\ShortScriptNameConverter.cs" />
     <Compile Include="DataConverter\TestStatusConverter.cs" />
     <Compile Include="Settings.cs" />
@@ -129,6 +132,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Grid\TestQueueDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Messagebox\MessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,9 +222,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="ConsoleApp\CommandLine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="ConsoleApp\EntityFramework.dll" />
+    <Content Include="ConsoleApp\EntityFramework.SqlServer.dll" />
+    <Content Include="ConsoleApp\NLog.dll" />
+    <Content Include="ConsoleApp\TestTracker.ConsoleApp.exe" />
+    <Content Include="ConsoleApp\TestTracker.Core.dll" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="ConsoleApp\NLog.config" />
+    <None Include="ConsoleApp\TestTracker.ConsoleApp.exe.config" />
     <None Include="NLog.xsd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -267,9 +284,7 @@
       <Name>TestTracker.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UlinkScripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

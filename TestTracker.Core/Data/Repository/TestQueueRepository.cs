@@ -36,9 +36,40 @@ namespace TestTracker.Core.Data.Repository
              //get queues of client computer 
              var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
              var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
-             return testQueue.Where(x => x.TestStatusId == 5).SingleOrDefault();
+             var running = testQueue.Where(x => x.TestStatusId ==(int)EnumTestStatus.Running).SingleOrDefault();
+             return running;
          }
 
+         public TestQueue SelectQueueProcessing()
+         {
+             //get queues of client computer 
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
+             return testQueue.Where(x => x.TestStatusId == 6).SingleOrDefault();
+         }
+
+         public void UpdateStatus(int testQueueId, EnumTestStatus newStatus)
+         {
+             var testQueue = db.TestQueues.Find(testQueueId);
+             testQueue.TestStatusId = (int)newStatus;
+             Update(testQueue);
+
+             //When done update new status for testQueue = Completed, Umcompleted, assign new Running Status for next test queue
+             if (newStatus == EnumTestStatus.Completed || newStatus == EnumTestStatus.Uncompleted)
+             {
+                 //update finished time
+                 testQueue.FinishedTime = DateTime.UtcNow;
+
+                 var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => x.TestStatusId == (int)EnumTestStatus.Pending
+                                                                                                        || x.TestStatusId == (int)EnumTestStatus.Uncompleted);
+
+                 testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
+                 Update(testQueueNext);
+             }
+
+             db.SaveChanges();
+         }
+            
          public TestQueue SelectByID(string id)
          {
              return db.TestQueues.Find(id);
@@ -70,6 +101,24 @@ namespace TestTracker.Core.Data.Repository
          {
              var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
              bool hasRunning = db.TestQueues.Any(x => x.TestStatusId == (int)EnumTestStatus.Running && testStuffId.Contains(x.TestStuffId));
+
+             //////if there is no running, assign new Running Status for next test queue
+             //if (!hasRunning)
+             //{
+             //    var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => x.TestStatusId == (int)EnumTestStatus.Pending
+             //                                                                                              || x.TestStatusId == (int)EnumTestStatus.Uncompleted);
+             //    if (testQueueNext == null)
+             //    {
+             //        return false;
+             //    }
+             //    else
+             //    {
+             //        testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
+             //        Update(testQueueNext);
+             //        db.SaveChanges();
+             //        return true;
+             //    }
+             //}
              return hasRunning;
          }
     }

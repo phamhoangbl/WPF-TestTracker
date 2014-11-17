@@ -1,0 +1,17 @@
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\NLog.config
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\TestTracker.ConsoleApp.exe.config
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\TestTracker.ConsoleApp.exe
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\TestTracker.ConsoleApp.pdb
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\CommandLine.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\EntityFramework.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\NLog.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\TestTracker.Core.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\TestTracker.Core.pdb
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\CommandLine.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\EntityFramework.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\NLog.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.csprojResolveAssemblyReference.cache
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.exe
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.pdb

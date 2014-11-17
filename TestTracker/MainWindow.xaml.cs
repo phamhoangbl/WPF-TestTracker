@@ -21,6 +21,7 @@ using NLog;
 using TestTracker.Core.Data.Model;
 using TestTracker.Core.Data.Repository;
 using TestTracker.Core.Utils;
+using TestTracker.Controls.Messagebox;
 
 namespace TestTracker
 {
@@ -33,8 +34,8 @@ namespace TestTracker
         private TestStuff _testStuffRunning = null;
         private Logger _logger;
         private bool _isClickRunTest;
-        private bool _isRunDMMaster;
-        private TimeSpan _timeSpan;
+        private bool _isValidRunDMMaster;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +43,8 @@ namespace TestTracker
 
             this.DataContext = this;
             _logger = LogManager.GetCurrentClassLogger();
-            TimeSpan span = TimeSpan.Zero;
+            _isValidRunDMMaster = true;
+            SetUpTimer();
         }
 
         private void ChangeFilePatch_Click(object sender, RoutedEventArgs e)
@@ -63,9 +65,13 @@ namespace TestTracker
                 // Open document
                 string filename = dlg.FileName;
                 _filePathTextBox.Text = filename;
+                _isValidRunDMMaster = true;
             }
         }
-
+        private void ChangeFilePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _isValidRunDMMaster = true;
+        }
         private void ChangeUlinkFolder_TextChanged(object sender, TextChangedEventArgs e)
         {
             // ... Get control that raised this event.
@@ -106,15 +112,8 @@ namespace TestTracker
 
         private void RunTest_Click(object sender, RoutedEventArgs e)
         {
-            _isClickRunTest = true;  
-            try
-            {
-                SetUpTimer();
-            }
-            catch
-            {
-                // Log error.
-            }
+            _isClickRunTest = true;
+            _isValidRunDMMaster = true;
 
             LoadingAdorner.IsAdornerVisible = true;
             _mainForm.IsEnabled = false;
@@ -125,6 +124,7 @@ namespace TestTracker
         private void BindControls(string ulinkFolderStr = null)
         {
             BindListFileScriptCheckbox(ulinkFolderStr);
+            _isValidRunDMMaster = true;
         }
 
         private void BindListFileScriptCheckbox(string ulinkFolderStr)
@@ -298,7 +298,7 @@ namespace TestTracker
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
         }
 
@@ -308,9 +308,13 @@ namespace TestTracker
             {
                 CreateTestQueue();
             }
-            if (_isRunDMMaster)
+
+            var testQueueRepository = new TestQueueRepository();
+            var hasRunning = testQueueRepository.HasRunning();
+
+            if (hasRunning && _isValidRunDMMaster)
             {
-                CallDmMaster();
+                CallConsoleApp();
             }
         }
 
@@ -356,6 +360,7 @@ namespace TestTracker
                     testQueue.FinishedTime = null;
                     testQueue.TestStuffId = testStuffId;
                     testQueue.TestResultId = null;
+
                     //if there is queue has running, then skip pending, if not then set status = running
                     var hasRunning = testQueueRepository.HasRunning();
                     if(hasRunning)
@@ -377,12 +382,11 @@ namespace TestTracker
             _isClickRunTest = false;
             LoadingAdorner.IsAdornerVisible = false;
             _mainForm.IsEnabled = true;
-            _isRunDMMaster = true;
         }
 
-        private void CallDmMaster()
+        private void CallConsoleApp()
         {
-            _logger.Info("Begin call DM Master exe");
+            _logger.Info("Begin call Console App exe");
             try
             {
                 var testQueueRepository = new TestQueueRepository();
@@ -392,16 +396,17 @@ namespace TestTracker
 
                 if (!File.Exists(_testQueueRunning.ScriptName))
                 {
-                    System.Windows.Forms.MessageBox.Show(string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
-                    _isRunDMMaster = false;
+                    _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
+                    _isValidRunDMMaster = false;
                     return;
                 }
                 if (!File.Exists(_filePathTextBox.Text))
                 {
-                    System.Windows.Forms.MessageBox.Show(string.Format("File {0} is not exist", _filePathTextBox.Text));
-                    _isRunDMMaster = false;
+                    _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _filePathTextBox.Text));
+                    _isValidRunDMMaster = false;
                     return;
                 }
+                _messageBox.Visibility = Visibility.Hidden;
 
                 var testStuffRepository = new TestStuffRepository();
                 _testStuffRunning = testStuffRepository.SelectByID(_testQueueRunning.TestStuffId);
@@ -415,8 +420,8 @@ namespace TestTracker
             catch (Exception ex)
             {
                 _logger.Error("error exception when trying to call dm master", ex);
-                System.Windows.Forms.MessageBox.Show("Error exception when trying to execute the file path, please check your network");
-                _isRunDMMaster = false;
+                AssignNewStatus(EnumTestStatus.Uncompleted);
+                _messageBox.ShowMessage(MessageType.Warning, string.Format("Error exception when trying to execute the file path, please check your network"));
             }
         }
 
@@ -430,28 +435,20 @@ namespace TestTracker
             startinfo.UseShellExecute = false;
             startinfo.CreateNoWindow = true;
             startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startinfo.FileName = fileDMPatch;
+            var testTrackerConsoleApp = Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "\\ConsoleApp\\TestTracker.ConsoleApp.exe");
+            startinfo.FileName = testTrackerConsoleApp;
             startinfo.RedirectStandardOutput = true;
 
-            startinfo.Arguments = string.Format(@"/s:{0} /v:{1} /d:{2} /p:{3} /l:/e", _testQueueRunning.ScriptName, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
+            startinfo.Arguments = string.Format(@"-i ""{0}"" -f ""{1}"" -s ""{2}"" -v ""{3}"" -d ""{4}"" -p ""{5}""", _testQueueRunning.TestQueueId.ToString(), fileDMPatch, _testQueueRunning.ScriptName, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
 
-            //start the process with the info we specified.
-            //call waitforexit and then the using statement will close.
+            //Assign Procesing status
+            AssignNewStatus(EnumTestStatus.Processing);
 
             using (Process process = Process.Start(startinfo))
             {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    _logger.Info(string.Format("dm master output: {0}", result));
-
-                    //when done process, check file export: excels and logs
-
-                }
+                process.Start();
+                _testQueueDataGrid.DataBind();
             }
-
-            _isRunDMMaster = false;
-            
         }
 
         private void RunScriptDefectDevice()
@@ -469,15 +466,14 @@ namespace TestTracker
 
             using (Process process = Process.Start(startinfo))
             {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    _logger.Info(string.Format("dm master output: {0}", result));
-
-                    //when done process, defect device info from file log
-
-                }
+                process.Start();
             }
+        }
+
+        private void AssignNewStatus(EnumTestStatus newStatus)
+        {
+            var testQueueRepository = new TestQueueRepository();
+            testQueueRepository.UpdateStatus(_testQueueRunning.TestQueueId, newStatus);
         }
 
         #endregion

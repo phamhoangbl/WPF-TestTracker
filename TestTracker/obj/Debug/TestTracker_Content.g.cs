@@ -8,6 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("consoleapp/entityframework.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("consoleapp/entityframework.sqlserver.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("consoleapp/nlog.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("consoleapp/testtracker.consoleapp.exe")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("consoleapp/testtracker.core.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("nlog.config")]
 
 

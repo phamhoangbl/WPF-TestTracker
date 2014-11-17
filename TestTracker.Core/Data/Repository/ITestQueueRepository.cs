@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestTracker.Core.Data.Model;
+using TestTracker.Core.Utils;
 
 namespace TestTracker.Core.Data.Repository
 {
@@ -12,6 +13,7 @@ namespace TestTracker.Core.Data.Repository
         IEnumerable<TestQueue> SelectAll();
         TestQueue SelectByID(string id);
         void Insert(TestQueue obj);
+        void UpdateStatus(int testQueueId, EnumTestStatus newStatus);
         void Update(TestQueue obj);
         void Delete(string id);
         bool HasRunning();
