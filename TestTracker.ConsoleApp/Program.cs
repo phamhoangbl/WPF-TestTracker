@@ -48,31 +48,43 @@ namespace TestTracker.ConsoleApp
             textDebug += String.Format("Script Name: {0}", options.ScriptName) + " \n";
             textDebug += String.Format("Verdor Id: {0}", options.VerdorId) + " \n";
             textDebug += String.Format("Device Id: {0}", options.DeviceId) + " \n";
-            textDebug += String.Format("Port: {0}", options.Port) + "\n";
+            textDebug += String.Format("Port: {0}", options.Port) + " \n";
             textDebug += String.Format("Other Options: {0}", options.OtherOption) + " \n";
 
             _logger.Info(textDebug);
 
+            var testQueueRepository = new TestQueueRepository();
             try
             {
-                CallDmMaster(testQueueId, filePatch, scriptName, verdorId, deviceId, port, otherOption);
+                int result;
+                CallDmMaster(testQueueId, filePatch, scriptName, verdorId, deviceId, port, otherOption, out result);
                 //Update status when have done run DM Master
-                var testQueueRepository = new TestQueueRepository();
-                testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
-                textDebug += "Done";
+                if (result == 0)
+                {
+                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
+                    textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
+                }
+                else if(result == 1)
+                {
+                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Stopped);
+                    textDebug += "Not Done: All lienses are busy";
+                }
                 textDebug += "---------------------------------------";
                 _logger.Info(textDebug);
             }
             catch(Exception ex)
             {
                 _logger.Info(string.Format("Error when trying to update status: {0}", ex.Message));
+                testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
             }
 
         }
 
-        private static void CallDmMaster(string testQueueId, string filePatch, string scriptName, string verdorId, string deviceId, string port, string orderOption)
+        //result = 0 ---> complete
+        //result = 1 ---> uncompleted
+        private static void CallDmMaster(string testQueueId, string filePatch, string scriptName, string verdorId, string deviceId, string port, string orderOption, out int result)
         {
-
+            result = 0;
             // Run Multi script Setup the process with the ProcessStartInfo class.
             // Retrieve Queues have status = Running
 
@@ -83,15 +95,21 @@ namespace TestTracker.ConsoleApp
             startinfo.FileName = filePatch;
             startinfo.RedirectStandardOutput = true;
 
-            startinfo.Arguments = string.Format(@"/s:""{0}"" /v:""{1}"" /D:""{2}"" /P:""{3}"" /l:/e", scriptName, verdorId, deviceId, port);
+            string arguments = string.Format(@"/s:""{0}"" /v:""{1}"" /D:""{2}"" /P:""{3}"" /l:/e", scriptName, verdorId, deviceId, port);
+            startinfo.Arguments = arguments;
+            _logger.Info(string.Format("File patch: {0}, file name: {1}", filePatch, arguments));
 
             //Assign Procesing status
             using (Process process = Process.Start(startinfo))
             {
-                using (StreamReader reader = process.StandardOutput)
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                process.WaitForExit();
+                stopwatch.Stop();
+
+                if(stopwatch.Elapsed.Seconds < 20)
                 {
-                    string result = reader.ReadToEnd();
-                    _logger.Info(result);
+                    result = 1;
                 }
             }
         }

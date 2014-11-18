@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestTracker.Core.Data.Model;
+using TestTracker.Core.Utils;
 
 namespace TestTracker.Controls.Grid
 {
@@ -27,11 +29,16 @@ namespace TestTracker.Controls.Grid
             DataContext = new TestQueueViewModel();
         }
 
-        public void DataBind()
+        // return true if there is any Queue have Status = Stop, else return 1
+        public bool DataBind()
         {
             DataContext = new TestQueueViewModel();
-            _testQueueDataGrid.ItemsSource = ((DataContext) as TestQueueViewModel).TestQueues;
+            var testQueues = ((DataContext) as TestQueueViewModel).TestQueues;
+
+            _testQueueDataGrid.ItemsSource = testQueues;
             _testQueueDataGrid.Items.Refresh();
+
+            return testQueues.SourceCollection.Cast<TestQueue>().ToList().Any(x=>x.TestStatusId == (int)EnumTestStatus.Stopped);
         }
     }
 }

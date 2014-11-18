@@ -36,10 +36,17 @@ namespace TestTracker.Core.Data.Repository
              //get queues of client computer 
              var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
              var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
-             var running = testQueue.Where(x => x.TestStatusId ==(int)EnumTestStatus.Running).SingleOrDefault();
+             var running = testQueue.Where(x => x.TestStatusId ==(int)EnumTestStatus.Running).FirstOrDefault();
              return running;
          }
-
+         public TestQueue SelectQueueStopped()
+         {
+             //get queues of client computer 
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
+             var running = testQueue.Where(x => x.TestStatusId == (int)EnumTestStatus.Stopped).FirstOrDefault();
+             return running;
+         }
          public TestQueue SelectQueueProcessing()
          {
              //get queues of client computer 
@@ -60,11 +67,14 @@ namespace TestTracker.Core.Data.Repository
                  //update finished time
                  testQueue.FinishedTime = DateTime.UtcNow;
 
-                 var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => x.TestStatusId == (int)EnumTestStatus.Pending
-                                                                                                        || x.TestStatusId == (int)EnumTestStatus.Uncompleted);
-
-                 testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
-                 Update(testQueueNext);
+                 var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+                 var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => testStuffId.Contains(x.TestStuffId) && (x.TestStatusId == (int)EnumTestStatus.Pending
+                                                                                                        || x.TestStatusId == (int)EnumTestStatus.Uncompleted));
+                 if (testQueueNext != null)
+                 {
+                     testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
+                     Update(testQueueNext);
+                 }
              }
 
              db.SaveChanges();
@@ -84,6 +94,12 @@ namespace TestTracker.Core.Data.Repository
          public void Update(TestQueue obj)
          {
              db.Entry(obj).State = EntityState.Modified;
+         }
+
+         public void UpdateAndSave(TestQueue obj)
+         {
+             db.Entry(obj).State = EntityState.Modified;
+             db.SaveChanges();
          }
 
          public void Delete(string id)

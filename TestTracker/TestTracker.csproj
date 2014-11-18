@@ -29,7 +29,7 @@
     <PublisherName>John Hoang</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>41</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -222,9 +222,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="ConsoleApp\CommandLine.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Content Include="ConsoleApp\CommandLine.dll" />
     <Content Include="ConsoleApp\EntityFramework.dll" />
     <Content Include="ConsoleApp\EntityFramework.SqlServer.dll" />
     <Content Include="ConsoleApp\NLog.dll" />
@@ -233,8 +231,10 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="ConsoleApp\NLog.config" />
-    <None Include="ConsoleApp\TestTracker.ConsoleApp.exe.config" />
+    <Content Include="ConsoleApp\NLog.config" />
+    <Content Include="ConsoleApp\TestTracker.ConsoleApp.exe.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="NLog.xsd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

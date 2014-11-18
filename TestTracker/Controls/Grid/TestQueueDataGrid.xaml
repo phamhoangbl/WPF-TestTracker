@@ -38,11 +38,11 @@
                 <DataGridTextColumn
                     Binding="{Binding Path=TestResultId}" Header="Result" />
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
+            <!--<DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Label Content="{Binding ScriptName}" Foreground="Red" />
                 </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
+            </DataGrid.RowDetailsTemplate>-->
         </DataGrid>
     </Grid>
 </UserControl>

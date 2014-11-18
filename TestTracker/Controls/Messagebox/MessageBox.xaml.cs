@@ -25,12 +25,17 @@ namespace TestTracker.Controls.Messagebox
             InitializeComponent();
         }
 
-        public void ShowMessage(MessageType messageType, string message)
+        public void ShowMessage(MessageType messageType, string message, string fullMessage = null)
         {
             _messageGroupBox.Visibility = Visibility.Visible;
             _messageLabel.Content = message;
             switch (messageType)
             {
+                case MessageType.Info:
+                    {
+                        _messageLabel.Foreground = Brushes.WhiteSmoke;
+                        break;
+                    }
                 case MessageType.Error:
                     {
                         _messageLabel.Foreground = Brushes.Red;
@@ -47,6 +52,15 @@ namespace TestTracker.Controls.Messagebox
                         break;
                     }
             }
+            if(fullMessage != null)
+            {
+                _messageLabel.ToolTip = fullMessage;
+            }
+        }
+
+        public void ShowOff()
+        {
+            _messageGroupBox.Visibility = Visibility.Visible;
         }
 
     }

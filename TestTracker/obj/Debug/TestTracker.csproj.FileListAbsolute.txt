@@ -26,16 +26,15 @@ C:\Users\johnhoang\documents\visual studio 2013\Projects\TestTracker\TestTracker
 C:\Users\johnhoang\documents\visual studio 2013\Projects\TestTracker\TestTracker\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\johnhoang\documents\visual studio 2013\Projects\TestTracker\TestTracker\obj\Debug\TestTracker_MarkupCompile.lref
 C:\Users\johnhoang\documents\visual studio 2013\Projects\TestTracker\TestTracker\obj\Debug\App.baml
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.exe.config
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\NLog.config
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.exe.manifest
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.application
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.exe
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.pdb
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\AdornedControl.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\EntityFramework.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\NLog.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\NLog.config
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.exe.config
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.exe.manifest
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.application
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\AdornedControl.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.Core.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.Core.pdb
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\AdornedControl.pdb
@@ -77,3 +76,4 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker.application
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker.exe
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker.pdb
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\TestTracker.pdb

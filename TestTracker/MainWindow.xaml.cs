@@ -30,11 +30,19 @@ namespace TestTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region 
+
+        private int MIN_TIMEOUT = 7; 
+
+        #endregion
+
         private TestQueue _testQueueRunning = null;
         private TestStuff _testStuffRunning = null;
         private Logger _logger;
         private bool _isClickRunTest;
         private bool _isValidRunDMMaster;
+        Stopwatch _stopwatch;
+
 
         public MainWindow()
         {
@@ -44,6 +52,7 @@ namespace TestTracker
             this.DataContext = this;
             _logger = LogManager.GetCurrentClassLogger();
             _isValidRunDMMaster = true;
+            _stopwatch = new Stopwatch();
             SetUpTimer();
         }
 
@@ -68,16 +77,19 @@ namespace TestTracker
                 _isValidRunDMMaster = true;
             }
         }
+
         private void ChangeFilePath_TextChanged(object sender, TextChangedEventArgs e)
         {
             _isValidRunDMMaster = true;
         }
+
         private void ChangeUlinkFolder_TextChanged(object sender, TextChangedEventArgs e)
         {
             // ... Get control that raised this event.
             var textBox = sender as System.Windows.Controls.TextBox;
             BindControls(textBox.Text);
         }
+
 
         private void ChangeUlinkFolder_Click(object sender, RoutedEventArgs e)
         {
@@ -312,9 +324,36 @@ namespace TestTracker
             var testQueueRepository = new TestQueueRepository();
             var hasRunning = testQueueRepository.HasRunning();
 
+
+            //if there is running queue, it's avalable to call Console App
             if (hasRunning && _isValidRunDMMaster)
             {
                 CallConsoleApp();
+            }
+
+            //if there is a stopped queue, it's busy, and start back in 7 minutes
+            var isStopeed = _testQueueDataGrid.DataBind();
+            if(isStopeed && !_stopwatch.IsRunning)
+            {
+                _messageBox.ShowMessage(MessageType.Warning, "All network lienses are busy, please wait for serveral minutes");
+                _isValidRunDMMaster = false;
+                _stopwatch.Start();
+            }
+
+            if (_stopwatch.Elapsed.Seconds > 10)
+            {
+                _messageBox.ShowOff();
+                //update against running test quese status from STOPPED to RUNNING
+                _testQueueRunning = testQueueRepository.SelectQueueStopped();
+                _testQueueRunning.TestStatusId = (int)EnumTestStatus.Running;
+                testQueueRepository.UpdateAndSave(_testQueueRunning);
+
+                _isValidRunDMMaster = true;
+                _stopwatch.Stop();
+                _stopwatch = new Stopwatch();
+
+                string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
+                _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName, _testQueueRunning.ScriptName));
             }
         }
 
@@ -406,7 +445,7 @@ namespace TestTracker
                     _isValidRunDMMaster = false;
                     return;
                 }
-                _messageBox.Visibility = Visibility.Hidden;
+                _messageBox.ShowOff();
 
                 var testStuffRepository = new TestStuffRepository();
                 _testStuffRunning = testStuffRepository.SelectByID(_testQueueRunning.TestStuffId);
@@ -435,11 +474,23 @@ namespace TestTracker
             startinfo.UseShellExecute = false;
             startinfo.CreateNoWindow = true;
             startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-            var testTrackerConsoleApp = Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "\\ConsoleApp\\TestTracker.ConsoleApp.exe");
-            startinfo.FileName = testTrackerConsoleApp;
+
+            string fileName = string.Empty;
+            var currentDirectory  = Directory.GetCurrentDirectory();
+            if(currentDirectory.Contains(@"bin\Debug"))
+            {
+                fileName = currentDirectory.Replace(@"\bin\Debug", @"\ConsoleApp\TestTracker.ConsoleApp.exe");
+            }
+            else
+            {
+                fileName = currentDirectory + @"\ConsoleApp\TestTracker.ConsoleApp.exe";
+            }
+            startinfo.FileName = fileName;
             startinfo.RedirectStandardOutput = true;
 
-            startinfo.Arguments = string.Format(@"-i ""{0}"" -f ""{1}"" -s ""{2}"" -v ""{3}"" -d ""{4}"" -p ""{5}""", _testQueueRunning.TestQueueId.ToString(), fileDMPatch, _testQueueRunning.ScriptName, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
+            string arguments = string.Format(@"-i ""{0}"" -f ""{1}"" -s ""{2}"" -v ""{3}"" -d ""{4}"" -p ""{5}""", _testQueueRunning.TestQueueId.ToString(), fileDMPatch, _testQueueRunning.ScriptName, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
+            _logger.Info("dir path: " + fileName + " " + arguments);
+            startinfo.Arguments = arguments;
 
             //Assign Procesing status
             AssignNewStatus(EnumTestStatus.Processing);
@@ -447,28 +498,29 @@ namespace TestTracker
             using (Process process = Process.Start(startinfo))
             {
                 process.Start();
-                _testQueueDataGrid.DataBind();
+                process.Kill();
             }
         }
 
-        private void RunScriptDefectDevice()
-        {
-            string fileDMPatch = _filePathTextBox.Text;
-            string fileScriptPath = @"\UlinkScripts\IdentifyDevice-V1.Log";
-            ProcessStartInfo startinfo = new ProcessStartInfo();
-            startinfo.UseShellExecute = false;
-            startinfo.CreateNoWindow = true;
-            startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startinfo.FileName = fileDMPatch;
-            startinfo.RedirectStandardOutput = true;
+        //private void RunScriptDefectDevice()
+        //{
+        //    string fileDMPatch = _filePathTextBox.Text;
+        //    string fileScriptPath = @"\UlinkScripts\IdentifyDevice-V1.Log";
+        //    ProcessStartInfo startinfo = new ProcessStartInfo();
+        //    startinfo.UseShellExecute = false;
+        //    startinfo.CreateNoWindow = true;
+        //    startinfo.WindowStyle = ProcessWindowStyle.Hidden;
+        //    startinfo.FileName = fileDMPatch;
+        //    startinfo.RedirectStandardOutput = true;
 
-            startinfo.Arguments = string.Format(@"/s:{0} /v:{1} /d:{2} /p:{3} /l:/e", fileScriptPath, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
+        //    startinfo.Arguments = string.Format(@"/s:{0} /v:{1} /d:{2} /p:{3} /l:/e", fileScriptPath, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
 
-            using (Process process = Process.Start(startinfo))
-            {
-                process.Start();
-            }
-        }
+        //    using (Process process = Process.Start(startinfo))
+        //    {
+        //        process.Start();
+        //        process.Kill();
+        //    }
+        //}
 
         private void AssignNewStatus(EnumTestStatus newStatus)
         {
