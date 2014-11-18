@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <local:TestStatusConverter x:Key="ToTestStatusString" />
         <local:ShortScriptNameConverter x:Key="ToShortScriptNameConverter" />
+        <local:ForeBackgroundConverter x:Key="ToForeBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
         <Label Content="gagag" Foreground="Red"></Label>
@@ -27,7 +28,8 @@
                 <DataGridTemplateColumn Header="Status">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding TestStatusId, Converter={StaticResource ToTestStatusString}}" HorizontalAlignment="Center"/>
+                            <Label Content="{Binding TestStatusId, Converter={StaticResource ToTestStatusString}}" 
+                                   Foreground="{Binding TestStatusId, Converter={StaticResource ToForeBackgroundConverter}}" HorizontalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

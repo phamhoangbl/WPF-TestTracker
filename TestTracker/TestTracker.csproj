@@ -116,6 +116,7 @@
     <Compile Include="Controls\Messagebox\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataConverter\ForeBackgroundConverter.cs" />
     <Compile Include="DataConverter\ShortScriptNameConverter.cs" />
     <Compile Include="DataConverter\TestStatusConverter.cs" />
     <Compile Include="Settings.cs" />

@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1067520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1068544">
       <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>L9hmcqVbGi1vc4KhSA6SvIc+oFhYyVEAjH8xKcDAqAk=</dsig:DigestValue>
+        <dsig:DigestValue>Mp5y2mYou83D1yAI1hQlCxwBjv+LR+LcuhSE2xTNYB8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>44OoUttsgxEi0HTEy0mSbhyRPqsjM7kwdrGwt188C58=</dsig:DigestValue>
+        <dsig:DigestValue>4nZzy4jO8mYTJBg67G3Pqo6IIYu70BZRPHaDa3FWUxg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

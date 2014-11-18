@@ -34,25 +34,33 @@ namespace TestTracker.Controls.Messagebox
                 case MessageType.Info:
                     {
                         _messageLabel.Foreground = Brushes.WhiteSmoke;
+                        _messageGroupBox.Header = "Info";
                         break;
                     }
                 case MessageType.Error:
                     {
                         _messageLabel.Foreground = Brushes.Red;
+                        _messageGroupBox.Header = "Error";
                         break;
                     }
                 case MessageType.Warning:
                     {
                         _messageLabel.Foreground = Brushes.Yellow;
+                        _messageGroupBox.Header = "Warning";
                         break;
                     }
                 case MessageType.Success:
                     {
-                        _messageLabel.Foreground = Brushes.Green;
+                        _messageLabel.Foreground = Brushes.LightGreen;
+                        _messageGroupBox.Header = "Success";
                         break;
                     }
             }
-            if(fullMessage != null)
+            if(!string.IsNullOrEmpty(fullMessage))
+            {
+                _messageLabel.ToolTip = fullMessage;
+            }
+            else
             {
                 _messageLabel.ToolTip = fullMessage;
             }

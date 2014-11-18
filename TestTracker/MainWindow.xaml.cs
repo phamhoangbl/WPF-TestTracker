@@ -328,6 +328,7 @@ namespace TestTracker
             //if there is running queue, it's avalable to call Console App
             if (hasRunning && _isValidRunDMMaster)
             {
+                _messageBox.ShowOff();
                 CallConsoleApp();
             }
 
@@ -335,12 +336,13 @@ namespace TestTracker
             var isStopeed = _testQueueDataGrid.DataBind();
             if(isStopeed && !_stopwatch.IsRunning)
             {
+                _messageBox.ShowOff();
                 _messageBox.ShowMessage(MessageType.Warning, "All network lienses are busy, please wait for serveral minutes");
                 _isValidRunDMMaster = false;
                 _stopwatch.Start();
             }
 
-            if (_stopwatch.Elapsed.Seconds > 10)
+            if (_stopwatch.Elapsed.Seconds > 10 && _testQueueRunning != null)
             {
                 _messageBox.ShowOff();
                 //update against running test quese status from STOPPED to RUNNING
@@ -353,7 +355,7 @@ namespace TestTracker
                 _stopwatch = new Stopwatch();
 
                 string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
-                _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName, _testQueueRunning.ScriptName));
+                _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
             }
         }
 
@@ -460,7 +462,7 @@ namespace TestTracker
             {
                 _logger.Error("error exception when trying to call dm master", ex);
                 AssignNewStatus(EnumTestStatus.Uncompleted);
-                _messageBox.ShowMessage(MessageType.Warning, string.Format("Error exception when trying to execute the file path, please check your network"));
+                _messageBox.ShowMessage(MessageType.Error, string.Format("Error exception when trying to execute the file path, please check your network"));
             }
         }
 
@@ -494,6 +496,8 @@ namespace TestTracker
 
             //Assign Procesing status
             AssignNewStatus(EnumTestStatus.Processing);
+            string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
+            _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
 
             using (Process process = Process.Start(startinfo))
             {
