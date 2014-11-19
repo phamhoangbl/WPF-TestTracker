@@ -140,6 +140,7 @@ namespace TestTracker
             if(hasProcessing != null)
             {
                 _testQueueRunning = testQueueRepository.MakeQueueRunning(hasProcessing.TestQueueId);
+                _testQueueDataGrid.DataBind();
             }
             else
             {
@@ -147,6 +148,7 @@ namespace TestTracker
                 if (!hasRunning)
                 {
                     _testQueueRunning = testQueueRepository.MakeQueueRunning();
+                    _testQueueDataGrid.DataBind();
                 }
             }
         }
@@ -330,7 +332,7 @@ namespace TestTracker
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
         }
 
@@ -504,7 +506,7 @@ namespace TestTracker
             }
             else
             {
-                fileName = currentDirectory + @"\ConsoleApp\TestTracker.ConsoleApp.exe";
+                fileName = currentDirectory + @"\consoleapp\testtracker.consoleapp.exe";
             }
             startinfo.FileName = fileName;
             startinfo.RedirectStandardOutput = true;
@@ -518,11 +520,7 @@ namespace TestTracker
             string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
             _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
 
-            using (Process process = Process.Start(startinfo))
-            {
-                process.Start();
-                process.Kill();
-            }
+            Process.Start(startinfo);
         }
 
         //private void RunScriptDefectDevice()

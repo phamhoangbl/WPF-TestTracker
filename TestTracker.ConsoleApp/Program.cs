@@ -12,11 +12,13 @@ using NLog;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 
 namespace TestTracker.ConsoleApp
 {
     public class Program
     {
+        private const string ALL_NETWORK_ARE_BUSY_TITLE = "Connection refused:";
         static Logger _logger = LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
@@ -61,7 +63,13 @@ namespace TestTracker.ConsoleApp
                 //Update status when have done run DM Master
                 if (result == 0)
                 {
+                    //check exported file
+                    //if has files
+
                     testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
+
+                    //if not
+                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
                     textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
                 }
                 else if(result == 1)
@@ -99,19 +107,21 @@ namespace TestTracker.ConsoleApp
             _logger.Info(string.Format("File patch: {0}, file name: {1}", filePatch, arguments));
 
             //Assign Procesing status
-            using (Process process = Process.Start(startinfo))
+            Process.Start(startinfo);
+            //wait for 3 s to DM process start
+            Thread.Sleep(20000);
+
+            _logger.Info(string.Format(string.Format("Done call DM Master app", DateTime.UtcNow)));
+
+            Process[] processlist = Process.GetProcesses();
+
+            foreach (Process theprocess in processlist)
             {
-                process.WaitForExit();
-
-                Process[] processlist = Process.GetProcesses();
-
-                foreach (Process theprocess in processlist)
+                if (theprocess.MainWindowTitle == ALL_NETWORK_ARE_BUSY_TITLE)
                 {
-                    if (theprocess.MainWindowTitle == "Connection refused:")
-                    {
-                        _logger.Info(string.Format(string.Format("All net work liense DM are busy {0}", DateTime.UtcNow)));
-                        theprocess.Kill();
-                    }
+                    _logger.Info(string.Format(string.Format("All net work liense DM are busy {0}", DateTime.UtcNow)));
+                    theprocess.Kill();
+                    result = 1;
                 }
             }
         }
