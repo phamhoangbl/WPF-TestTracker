@@ -11,7 +11,7 @@ namespace TestTracker.Core.Data.Repository
     public interface ITestQueueRepository
     {
         IEnumerable<TestQueue> SelectAll();
-        TestQueue SelectByID(string id);
+        TestQueue SelectByID(int id);
         void Insert(TestQueue obj);
         void UpdateStatus(int testQueueId, EnumTestStatus newStatus);
         void Update(TestQueue obj);

@@ -80,7 +80,7 @@ namespace TestTracker.Core.Data.Repository
              db.SaveChanges();
          }
             
-         public TestQueue SelectByID(string id)
+         public TestQueue SelectByID(int id)
          {
              return db.TestQueues.Find(id);
          }
@@ -116,26 +116,37 @@ namespace TestTracker.Core.Data.Repository
          public bool HasRunning()
          {
              var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
-             bool hasRunning = db.TestQueues.Any(x => x.TestStatusId == (int)EnumTestStatus.Running && testStuffId.Contains(x.TestStuffId));
+             return db.TestQueues.Any(x => x.TestStatusId == (int)EnumTestStatus.Running && testStuffId.Contains(x.TestStuffId));
+         }
 
-             //////if there is no running, assign new Running Status for next test queue
-             //if (!hasRunning)
-             //{
-             //    var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => x.TestStatusId == (int)EnumTestStatus.Pending
-             //                                                                                              || x.TestStatusId == (int)EnumTestStatus.Uncompleted);
-             //    if (testQueueNext == null)
-             //    {
-             //        return false;
-             //    }
-             //    else
-             //    {
-             //        testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
-             //        Update(testQueueNext);
-             //        db.SaveChanges();
-             //        return true;
-             //    }
-             //}
-             return hasRunning;
+         public TestQueue SelectTestQueueProcessing()
+         {
+             //get queues of client computer 
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             return db.TestQueues.FirstOrDefault(x => x.TestStatusId == (int)EnumTestStatus.Processing && testStuffId.Contains(x.TestStuffId));
+         }
+
+         public TestQueue MakeQueueRunning()
+         {
+             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
+             var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => testStuffId.Contains(x.TestStuffId) && (x.TestStatusId == (int)EnumTestStatus.Pending
+                                                                                                    || x.TestStatusId == (int)EnumTestStatus.Uncompleted));
+             if (testQueueNext != null)
+             {
+                 testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
+                 UpdateAndSave(testQueueNext);
+             }
+
+             return testQueueNext;
+         }
+
+         public TestQueue MakeQueueRunning(int testQueueProcessingId)
+         {
+             TestQueue processingQueue = SelectByID(testQueueProcessingId);
+             processingQueue.TestStatusId = (int)EnumTestStatus.Running;
+             UpdateAndSave(processingQueue);
+
+             return processingQueue;
          }
     }
 }

@@ -131,6 +131,26 @@ namespace TestTracker
             _mainForm.IsEnabled = false;
         }
 
+        private void Datafixer_Click(object sender, RoutedEventArgs e)
+        {
+            var testQueueRepository = new TestQueueRepository();
+            var hasRunning = testQueueRepository.HasRunning();
+            var hasProcessing = testQueueRepository.SelectTestQueueProcessing();
+            //if there is no queue processing, make one
+            if(hasProcessing != null)
+            {
+                _testQueueRunning = testQueueRepository.MakeQueueRunning(hasProcessing.TestQueueId);
+            }
+            else
+            {
+                //if there is no queue running, make one
+                if (!hasRunning)
+                {
+                    _testQueueRunning = testQueueRepository.MakeQueueRunning();
+                }
+            }
+        }
+
         #region Private Metods
 
         private void BindControls(string ulinkFolderStr = null)
@@ -323,7 +343,6 @@ namespace TestTracker
 
             var testQueueRepository = new TestQueueRepository();
             var hasRunning = testQueueRepository.HasRunning();
-
 
             //if there is running queue, it's avalable to call Console App
             if (hasRunning && _isValidRunDMMaster)

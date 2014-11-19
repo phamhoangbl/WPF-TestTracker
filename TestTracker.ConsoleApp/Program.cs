@@ -81,7 +81,7 @@ namespace TestTracker.ConsoleApp
         }
 
         //result = 0 ---> complete
-        //result = 1 ---> uncompleted
+        //result = 1 ---> uncompleted because of all net work liense DM are busy
         private static void CallDmMaster(string testQueueId, string filePatch, string scriptName, string verdorId, string deviceId, string port, string orderOption, out int result)
         {
             result = 0;
@@ -94,7 +94,6 @@ namespace TestTracker.ConsoleApp
             startinfo.WindowStyle = ProcessWindowStyle.Hidden;
             startinfo.FileName = filePatch;
             startinfo.RedirectStandardOutput = true;
-
             string arguments = string.Format(@"/s:""{0}"" /v:""{1}"" /D:""{2}"" /P:""{3}"" /l:/e", scriptName, verdorId, deviceId, port);
             startinfo.Arguments = arguments;
             _logger.Info(string.Format("File patch: {0}, file name: {1}", filePatch, arguments));
@@ -102,14 +101,17 @@ namespace TestTracker.ConsoleApp
             //Assign Procesing status
             using (Process process = Process.Start(startinfo))
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
                 process.WaitForExit();
-                stopwatch.Stop();
 
-                if(stopwatch.Elapsed.Seconds < 20)
+                Process[] processlist = Process.GetProcesses();
+
+                foreach (Process theprocess in processlist)
                 {
-                    result = 1;
+                    if (theprocess.MainWindowTitle == "Connection refused:")
+                    {
+                        _logger.Info(string.Format(string.Format("All net work liense DM are busy {0}", DateTime.UtcNow)));
+                        theprocess.Kill();
+                    }
                 }
             }
         }
