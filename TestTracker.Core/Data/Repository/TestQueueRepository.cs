@@ -47,13 +47,6 @@ namespace TestTracker.Core.Data.Repository
              var running = testQueue.Where(x => x.TestStatusId == (int)EnumTestStatus.Stopped).FirstOrDefault();
              return running;
          }
-         public TestQueue SelectQueueProcessing()
-         {
-             //get queues of client computer 
-             var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
-             var testQueue = db.TestQueues.ToList().Where(x => testStuffId.Contains(x.TestStuffId)).OrderBy(x => x.TestQueueId);
-             return testQueue.Where(x => x.TestStatusId == 6).SingleOrDefault();
-         }
 
          public void UpdateStatus(int testQueueId, EnumTestStatus newStatus)
          {
@@ -78,34 +71,6 @@ namespace TestTracker.Core.Data.Repository
              }
 
              db.SaveChanges();
-         }
-            
-         public TestQueue SelectByID(int id)
-         {
-             return db.TestQueues.Find(id);
-         }
-
-         public void Insert(TestQueue obj)
-         {
-             db.TestQueues.Add(obj);
-             db.SaveChanges();
-         }
-
-         public void Update(TestQueue obj)
-         {
-             db.Entry(obj).State = EntityState.Modified;
-         }
-
-         public void UpdateAndSave(TestQueue obj)
-         {
-             db.Entry(obj).State = EntityState.Modified;
-             db.SaveChanges();
-         }
-
-         public void Delete(string id)
-         {
-             TestQueue existing = db.TestQueues.Find(id);
-             db.TestQueues.Remove(existing);
          }
 
          public void Save()
@@ -147,6 +112,34 @@ namespace TestTracker.Core.Data.Repository
              UpdateAndSave(processingQueue);
 
              return processingQueue;
+         }
+
+         public TestQueue SelectByID(int id)
+         {
+             return db.TestQueues.Find(id);
+         }
+
+         public void Insert(TestQueue obj)
+         {
+             db.TestQueues.Add(obj);
+             db.SaveChanges();
+         }
+
+         public void Update(TestQueue obj)
+         {
+             db.Entry(obj).State = EntityState.Modified;
+         }
+
+         public void UpdateAndSave(TestQueue obj)
+         {
+             db.Entry(obj).State = EntityState.Modified;
+             db.SaveChanges();
+         }
+
+         public void Delete(string id)
+         {
+             TestQueue existing = db.TestQueues.Find(id);
+             db.TestQueues.Remove(existing);
          }
     }
 }

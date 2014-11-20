@@ -13,6 +13,9 @@ namespace TestTracker.Core.Utils
         Uncompleted = 3,
         Stopped = 4,
         Running = 5,
-        Processing = 6
+        Processing = 6,
+        FailConnection = 7,
+        BusyConnection = 8,
+        WrongPort = 9
     };
 }

@@ -90,26 +90,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="10240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="10752">
       <assemblyIdentity name="TestTracker.ConsoleApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WN49+pYOGV0olOfJjZcCwVJ2edFSWDhP+My/cWn+ymM=</dsig:DigestValue>
+        <dsig:DigestValue>JhqVNC68mzk1Y0wjPVLLVrakhhEJjfqPNLdKF8JCtGY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="17408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="16896">
       <assemblyIdentity name="TestTracker.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>9VPk6x7U1z9r1jmcX/UdPAo7dbdIAGGD5hsivrcN0uA=</dsig:DigestValue>
+        <dsig:DigestValue>SMCAQa79S8yhCO04S2QRf+Avx9fIlnxVvaGvB8XdYkg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,13 +122,13 @@
       <dsig:DigestValue>tC4d10Klu8R9nBnOm880BdcpiS0CDJpxAkxw4wcFlyY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TestTracker.ConsoleApp.exe.config" size="1362">
+  <file name="TestTracker.ConsoleApp.exe.config" size="1654">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SUPlDItA3yQq/HbjddiVHdZAafuD61Ebc9Qfi2sSrek=</dsig:DigestValue>
+      <dsig:DigestValue>QF/EvpJvwV/3GPSlyzeDNXUMxwMi+YfirEmzxFW2qtM=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

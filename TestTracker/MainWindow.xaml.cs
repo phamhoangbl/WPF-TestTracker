@@ -196,7 +196,6 @@ namespace TestTracker
                 CreateScriptNodes(GetFileName(testScriptFolderDir), testScriptFolderDir, parentScripts);
 
                 //Get file scripts in the child directory
-
                 foreach(var testScriptFolderPath in testScriptFolderPaths)
                 {
                     string testScriptFolder = GetFileName(testScriptFolderPath);
@@ -332,7 +331,7 @@ namespace TestTracker
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
         }
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.47" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.59" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Viritum-Logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1079296">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1080320">
       <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lfZEfM3bt1C5JmwZpgPBj2eg1pITOLe7+PHTDrYP6Pg=</dsig:DigestValue>
+        <dsig:DigestValue>iFvDdjVq10S+0GPoiyf4dMrQA9geXQQw5/hzZN863js=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FjeViDoHdHMEVRrhw8xmK6nwqfB0BDqGrNVdeFxxo2Y=</dsig:DigestValue>
+        <dsig:DigestValue>T8IVXwsf4M/MTFpdxfsA3dHDwjdTEL7R+q3XaEH0xlY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -159,22 +159,22 @@
       <dsig:DigestValue>bIVDfrM6MDsjnC4Ck8R3FI7oboQBOurMTau5wcbcqN8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="10240">
+  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="10752">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ByrPqq6RCcxCQkq00cmLldTgHyle2aa+gjj3ejNKFS4=</dsig:DigestValue>
+      <dsig:DigestValue>p+i/s4BjaCJv0RhZf/83uyY+E50SrJQj6olGEVmoUXU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.ConsoleApp.exe.config" size="1362">
+  <file name="ConsoleApp\TestTracker.ConsoleApp.exe.config" size="1610">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SUPlDItA3yQq/HbjddiVHdZAafuD61Ebc9Qfi2sSrek=</dsig:DigestValue>
+      <dsig:DigestValue>i98EBpsBaUmGfrGsYdFobcKjMpD0ch8h8mgqcL/v9zk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ConsoleApp\TestTracker.Core.dll" size="17408">
@@ -195,13 +195,13 @@
       <dsig:DigestValue>o9yNKUf4hwg6ilGkFdOIqP7nRF/VBK5fpqTF6d1VS6g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TestTracker.exe.config" size="1362">
+  <file name="TestTracker.exe.config" size="1610">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SUPlDItA3yQq/HbjddiVHdZAafuD61Ebc9Qfi2sSrek=</dsig:DigestValue>
+      <dsig:DigestValue>i98EBpsBaUmGfrGsYdFobcKjMpD0ch8h8mgqcL/v9zk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Viritum-Logo.ico" size="5430">
