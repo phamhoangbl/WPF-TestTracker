@@ -69,14 +69,22 @@ namespace TestTracker.ConsoleApp
                 //Update status when have done run DM Master
                 if (result == 0)
                 {
+                    FileExport file = new FileExport();
+                    List<FileResult> listFileResult = file.CheckFileResult();
+
                     //check exported file
-                    //if has files
-
-                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
-
-                    //if not
-                    //testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
-                    textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
+                    //if has files, change status = Completed
+                    if (listFileResult.Any())
+                    {
+                        testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
+                        textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
+                    }
+                    //if not, change status = UmCompleted
+                    else
+                    {
+                        testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
+                        textDebug += string.Format("Not Done: Updated Status Queue is not completed for {0}***", scriptName);
+                    }
                 }
                 else if(result == 1)
                 {
@@ -154,6 +162,5 @@ namespace TestTracker.ConsoleApp
                 }
             }
         }
-
     }
 }

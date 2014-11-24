@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="540">
     <Grid>
-        <GroupBox x:Name="_messageGroupBox" HorizontalAlignment="Left" Visibility="Hidden" Header="Message Box" Width="540" Height="60" RenderTransformOrigin="0.506,0.195" >
+        <GroupBox x:Name="_messageGroupBox" HorizontalAlignment="Left" Visibility="Hidden" Header="Message Box" Width="640" Height="60" RenderTransformOrigin="0.506,0.195" >
             <Label x:Name="_messageLabel" Content="Message String" VerticalAlignment="Center"></Label>
         </GroupBox>
     </Grid>

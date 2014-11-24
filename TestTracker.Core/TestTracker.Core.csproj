@@ -54,7 +54,9 @@
     <Compile Include="Data\Repository\ITestQueueRepository.cs" />
     <Compile Include="Data\Repository\TestQueueRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CsvReader.cs" />
     <Compile Include="Utils\EnumTest.cs" />
+    <Compile Include="Utils\FilleResultTemplate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -48,6 +48,7 @@ namespace TestTracker
         private bool _isValidRunDMMaster;
         private bool _isRun;
         Stopwatch _stopwatch;
+        System.Windows.Threading.DispatcherTimer _dispatcherTimer;
 
         public MainWindow()
         {
@@ -58,6 +59,7 @@ namespace TestTracker
             _logger = LogManager.GetCurrentClassLogger();
             _isValidRunDMMaster = true;
             _stopwatch = new Stopwatch();
+            _runTestButton.IsEnabled = false;
             SetUpTimer();
         }
 
@@ -133,31 +135,22 @@ namespace TestTracker
 
             LoadingAdorner.IsAdornerVisible = true;
             _mainForm.IsEnabled = false;
+            _dispatcherTimer.Start();
+
+            _runTestButton.IsEnabled = false;
+            _stopTestButton.IsEnabled = true;
+        }
+
+        protected void StopTest_Click(object sender, RoutedEventArgs e)
+        {
+            _dispatcherTimer.Stop();
+
+            _stopTestButton.IsEnabled = false;
+            _runTestButton.IsEnabled = true;
         }
 
         #endregion
 
-        //private void Datafixer_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var testQueueRepository = new TestQueueRepository();
-        //    var testQueue = testQueueRepository.RetrieveTestQueueNotCompleted();
-        //    var hasProcessing = testQueueRepository.SelectTestQueueProcessing();
-        //    //if there is no queue processing, make one
-        //    if(hasProcessing != null)
-        //    {
-        //        _testQueueRunning = testQueueRepository.MakeQueueRunning(hasProcessing.TestQueueId);
-        //        _testQueueDataGrid.DataBind();
-        //    }
-        //    else
-        //    {
-        //        //if there is no queue running, make one
-        //        if (!hasRunning)
-        //        {
-        //            _testQueueRunning = testQueueRepository.MakeQueueRunning();
-        //            _testQueueDataGrid.DataBind();
-        //        }
-        //    }
-        //}
 
         #region Private Metods
 
@@ -335,10 +328,10 @@ namespace TestTracker
 
         private void SetUpTimer()
         {
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
-            dispatcherTimer.Start();
+            _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            _dispatcherTimer.Start();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -483,15 +476,16 @@ namespace TestTracker
             var testQueueRepository = new TestQueueRepository();
 
             //failed to validate Test Queue
-            if (!File.Exists(_testQueueRunning.ScriptName))
-            {
-                _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
-                _isValidRunDMMaster = false;
-                return;
-            }
             if (!File.Exists(_filePathTextBox.Text))
             {
                 _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _filePathTextBox.Text));
+                _isValidRunDMMaster = false;
+                return;
+            }
+
+            if (!File.Exists(_testQueueRunning.ScriptName))
+            {
+                _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
                 _isValidRunDMMaster = false;
                 return;
             }
