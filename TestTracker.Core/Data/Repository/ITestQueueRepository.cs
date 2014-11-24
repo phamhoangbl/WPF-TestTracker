@@ -10,13 +10,14 @@ namespace TestTracker.Core.Data.Repository
 {
     public interface ITestQueueRepository
     {
-        IEnumerable<TestQueue> SelectAll();
-        TestQueue SelectByID(int id);
-        void Insert(TestQueue obj);
-        void UpdateStatus(int testQueueId, EnumTestStatus newStatus);
-        void Update(TestQueue obj);
-        void Delete(string id);
-        bool HasRunning();
-        void Save();
+        IEnumerable<TestQueue> SelectAllTestQueue();
+        TestQueue RetrieveTestQueue(int id);
+        void InsertTestQueue(TestQueue obj);
+        void UpdateTestQueueStatus(int testQueueId, EnumTestStatus newStatus);
+        void UpdateTestQueue(TestQueue obj);
+        void DeleteTestQueue(string id);
+        TestQueue RetrieveTestQueueNotCompleted();
+        TestQueue SelectTestQueueProcessing();
+        void SaveTestQueue();
     }
 }

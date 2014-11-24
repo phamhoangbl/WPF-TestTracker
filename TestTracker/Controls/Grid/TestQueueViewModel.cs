@@ -17,7 +17,7 @@ namespace TestTracker.Controls.Grid
         public TestQueueViewModel()
         {
             var testQueueRepository = new TestQueueRepository();
-            var _testQueue = testQueueRepository.SelectAll();
+            var _testQueue = testQueueRepository.SelectAllTestQueue();
             
             TestQueues = CollectionViewSource.GetDefaultView(_testQueue);
 

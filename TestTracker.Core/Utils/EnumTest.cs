@@ -16,6 +16,6 @@ namespace TestTracker.Core.Utils
         Processing = 6,
         FailConnection = 7,
         BusyConnection = 8,
-        WrongPort = 9
+        WrongHBAConfig = 9
     };
 }

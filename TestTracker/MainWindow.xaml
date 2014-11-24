@@ -110,8 +110,8 @@
                     </DockPanel>
                     <DockPanel>
                         <Button Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Run Test" Click="RunTest_Click" />
-                        <Label Content="If the automatic process is stuck, please press the 'Data Fixer' button" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,0,0"></Label>
-                        <Button Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="28" Margin="4,11,24,4" IsDefault="True" Content="Data Fixer" Click="Datafixer_Click" />
+                        <!--<Label Content="If the automatic process is stuck, please press the 'Data Fixer' button" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,0,0"></Label>
+                        <Button Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="28" Margin="4,11,24,4" IsDefault="True" Content="Data Fixer" Click="Datafixer_Click" />-->
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Canvas.Top="190" Canvas.Left="4">

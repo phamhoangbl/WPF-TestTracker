@@ -27,7 +27,9 @@ namespace TestTracker.DataConverter
             {
                 return Brushes.Yellow;
             }
-            else if (testStatusId == (int)EnumTestStatus.Stopped || testStatusId == (int)EnumTestStatus.Uncompleted)
+            else if (testStatusId == (int)EnumTestStatus.Stopped || testStatusId == (int)EnumTestStatus.Uncompleted
+                || testStatusId == (int)EnumTestStatus.FailConnection || testStatusId == (int)EnumTestStatus.BusyConnection
+                || testStatusId == (int)EnumTestStatus.WrongHBAConfig)
             {
                 return Brushes.Red;
             }

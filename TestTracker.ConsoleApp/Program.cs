@@ -18,8 +18,15 @@ namespace TestTracker.ConsoleApp
 {
     public class Program
     {
-        private const string ALL_NETWORK_ARE_BUSY_TITLE = "Connection refused:";
-        private const string ALL_NETWORK_ARE_FAIL_TITLE = "Connection failed:";
+        #region Const Strings
+
+        private const string STR_ALL_NETWORK_ARE_BUSY_TITLE = "Connection refused:";
+        private const string STR_NETWORK_ARE_FAIL_TITLE = "Connection failed:";
+        private const string STR_WRONG_HBA_CONFIGURATION_TITLE = "DriveMaster HBA Configuration";
+
+        #endregion
+
+
         static Logger _logger = LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
@@ -30,8 +37,6 @@ namespace TestTracker.ConsoleApp
             {
                 Run(options);
             }
-
-            Console.ReadLine();
         }
 
         private static void Run(Options options)
@@ -67,7 +72,7 @@ namespace TestTracker.ConsoleApp
                     //check exported file
                     //if has files
 
-                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
+                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
 
                     //if not
                     //testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
@@ -75,13 +80,18 @@ namespace TestTracker.ConsoleApp
                 }
                 else if(result == 1)
                 {
-                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.BusyConnection);
+                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.BusyConnection);
                     textDebug += "Not Done: All lienses are busy";
                 }
                 else if (result == 2)
                 {
-                    testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.FailConnection);
+                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.FailConnection);
                     textDebug += "Not Done: Connection fails, check your VPN";
+                }
+                else if (result == 3)
+                {
+                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.WrongHBAConfig);
+                    textDebug += "Not Done: Wrong HBA Config, check device configuration";
                 }
                 textDebug += "---------------------------------------";
                 _logger.Info(textDebug);
@@ -89,7 +99,7 @@ namespace TestTracker.ConsoleApp
             catch(Exception ex)
             {
                 _logger.Info(string.Format("Error when trying to update status: {0}", ex.Message));
-                testQueueRepository.UpdateStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
+                testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
             }
 
         }
@@ -114,7 +124,7 @@ namespace TestTracker.ConsoleApp
 
             //Assign Procesing status
             Process.Start(startinfo);
-            //wait for 3 s to DM process start
+            //wait for 25 s to DM process start
             Thread.Sleep(25000);
 
             _logger.Info(string.Format(string.Format("Done call DM Master app", DateTime.UtcNow)));
@@ -124,17 +134,23 @@ namespace TestTracker.ConsoleApp
             foreach (Process theprocess in processlist)
             {
                 //_logger.Info(string.Format(string.Format("Processes: {0}, {1}", theprocess.ProcessName, theprocess.MainWindowTitle)));
-                if (theprocess.MainWindowTitle == ALL_NETWORK_ARE_BUSY_TITLE)
+                if (theprocess.MainWindowTitle == STR_ALL_NETWORK_ARE_BUSY_TITLE)
                 {
                     _logger.Info(string.Format(string.Format("All net work liense DM are busy {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 1;
                 }
-                if (theprocess.MainWindowTitle == ALL_NETWORK_ARE_FAIL_TITLE)
+                if (theprocess.MainWindowTitle == STR_NETWORK_ARE_FAIL_TITLE)
                 {
                     _logger.Info(string.Format(string.Format("Failed to connect VPN {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 2;
+                }
+                if (theprocess.MainWindowTitle.Contains(STR_WRONG_HBA_CONFIGURATION_TITLE))
+                {
+                    _logger.Info(string.Format(string.Format("Wrong HBA Configuration {0}", DateTime.UtcNow)));
+                    theprocess.Kill();
+                    result = 3;
                 }
             }
         }

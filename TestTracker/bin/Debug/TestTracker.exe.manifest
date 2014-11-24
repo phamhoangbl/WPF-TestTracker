@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.59" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="TestTracker.exe" version="1.0.0.71" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Viritum-Logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -91,26 +91,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1079296">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1080320">
       <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UtryqJai28756EwVwkj8DaVeb9cZQhpdD603fboAjPU=</dsig:DigestValue>
+        <dsig:DigestValue>4yoUi0DwIk3Z3AMuLI6yiwfEAtK1CUs/qYfQYg4G2HU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="16896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="23040">
       <assemblyIdentity name="TestTracker.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>SMCAQa79S8yhCO04S2QRf+Avx9fIlnxVvaGvB8XdYkg=</dsig:DigestValue>
+        <dsig:DigestValue>UlUJiZ1CotJn5gwM13BskbFF8hmpYhycqbOMuemtNHU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -159,31 +159,31 @@
       <dsig:DigestValue>bIVDfrM6MDsjnC4Ck8R3FI7oboQBOurMTau5wcbcqN8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="10752">
+  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="11264">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>p+i/s4BjaCJv0RhZf/83uyY+E50SrJQj6olGEVmoUXU=</dsig:DigestValue>
+      <dsig:DigestValue>2O7hGWGZcWuz1dPTg28WZq7lA6d5NpQIDg76823Flg0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.ConsoleApp.exe.config" size="1610">
+  <file name="ConsoleApp\TestTracker.ConsoleApp.exe.config" size="1654">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>i98EBpsBaUmGfrGsYdFobcKjMpD0ch8h8mgqcL/v9zk=</dsig:DigestValue>
+      <dsig:DigestValue>QF/EvpJvwV/3GPSlyzeDNXUMxwMi+YfirEmzxFW2qtM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.Core.dll" size="17408">
+  <file name="ConsoleApp\TestTracker.Core.dll" size="23040">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WdIKKS5n3k0qHq1zKS314zF9i1va6XRDv1V1mIVHrbM=</dsig:DigestValue>
+      <dsig:DigestValue>mCzxLX0IPJ/ghJpvRnjuv+kznCOEUWrx5JNxK+ctVUM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="NLog.config" size="983">

@@ -30,19 +30,24 @@ namespace TestTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region 
+        #region const string
 
-        private int MIN_TIMEOUT = 7; 
+        private const string STR_FAILED_TO_CONNECTION_VPN = "Failed to connect server, make sure your VPN is opended";
+        private const string STR_ALL_NETWORK_LIENSE_ARE_BUSY = "All network lienses are busy, please wait for serveral minutes";
+        private const string STR_WRONG_HBA_CONFIG = "Worng Port, please make sure the ports are matched";
+        private const string STR_UNCOMPLETED = "There is an error when trying to process, please try again";
 
         #endregion
+
+        #region Events 
 
         private TestQueue _testQueueRunning = null;
         private TestStuff _testStuffRunning = null;
         private Logger _logger;
         private bool _isClickRunTest;
         private bool _isValidRunDMMaster;
+        private bool _isRun;
         Stopwatch _stopwatch;
-
 
         public MainWindow()
         {
@@ -56,7 +61,7 @@ namespace TestTracker
             SetUpTimer();
         }
 
-        private void ChangeFilePatch_Click(object sender, RoutedEventArgs e)
+        protected void ChangeFilePatch_Click(object sender, RoutedEventArgs e)
         {
             // Create OpenFileDialog
             OpenFileDialog dlg = new OpenFileDialog();
@@ -78,20 +83,19 @@ namespace TestTracker
             }
         }
 
-        private void ChangeFilePath_TextChanged(object sender, TextChangedEventArgs e)
+        protected void ChangeFilePath_TextChanged(object sender, TextChangedEventArgs e)
         {
             _isValidRunDMMaster = true;
         }
 
-        private void ChangeUlinkFolder_TextChanged(object sender, TextChangedEventArgs e)
+        protected void ChangeUlinkFolder_TextChanged(object sender, TextChangedEventArgs e)
         {
             // ... Get control that raised this event.
             var textBox = sender as System.Windows.Controls.TextBox;
             BindControls(textBox.Text);
         }
 
-
-        private void ChangeUlinkFolder_Click(object sender, RoutedEventArgs e)
+        protected void ChangeUlinkFolder_Click(object sender, RoutedEventArgs e)
         {
             using (FolderBrowserDialog dlg = new FolderBrowserDialog())
             {
@@ -107,22 +111,22 @@ namespace TestTracker
             }
         }
 
-        private void ChechkAll_Click(object sender, RoutedEventArgs e)
+        protected void ChechkAll_Click(object sender, RoutedEventArgs e)
         {
             CheckAllOrNot(true);
         }
 
-        private void UnCheckedAll_Click(object sender, RoutedEventArgs e)
+        protected void UnCheckedAll_Click(object sender, RoutedEventArgs e)
         {
             CheckAllOrNot(false);
         }
 
-        private void ToogleExpand_Click(object sender, RoutedEventArgs e)
+        protected void ToogleExpand_Click(object sender, RoutedEventArgs e)
         {
             ToogleExapnd();
         }
 
-        private void RunTest_Click(object sender, RoutedEventArgs e)
+        protected void RunTest_Click(object sender, RoutedEventArgs e)
         {
             _isClickRunTest = true;
             _isValidRunDMMaster = true;
@@ -131,27 +135,29 @@ namespace TestTracker
             _mainForm.IsEnabled = false;
         }
 
-        private void Datafixer_Click(object sender, RoutedEventArgs e)
-        {
-            var testQueueRepository = new TestQueueRepository();
-            var hasRunning = testQueueRepository.HasRunning();
-            var hasProcessing = testQueueRepository.SelectTestQueueProcessing();
-            //if there is no queue processing, make one
-            if(hasProcessing != null)
-            {
-                _testQueueRunning = testQueueRepository.MakeQueueRunning(hasProcessing.TestQueueId);
-                _testQueueDataGrid.DataBind();
-            }
-            else
-            {
-                //if there is no queue running, make one
-                if (!hasRunning)
-                {
-                    _testQueueRunning = testQueueRepository.MakeQueueRunning();
-                    _testQueueDataGrid.DataBind();
-                }
-            }
-        }
+        #endregion
+
+        //private void Datafixer_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var testQueueRepository = new TestQueueRepository();
+        //    var testQueue = testQueueRepository.RetrieveTestQueueNotCompleted();
+        //    var hasProcessing = testQueueRepository.SelectTestQueueProcessing();
+        //    //if there is no queue processing, make one
+        //    if(hasProcessing != null)
+        //    {
+        //        _testQueueRunning = testQueueRepository.MakeQueueRunning(hasProcessing.TestQueueId);
+        //        _testQueueDataGrid.DataBind();
+        //    }
+        //    else
+        //    {
+        //        //if there is no queue running, make one
+        //        if (!hasRunning)
+        //        {
+        //            _testQueueRunning = testQueueRepository.MakeQueueRunning();
+        //            _testQueueDataGrid.DataBind();
+        //        }
+        //    }
+        //}
 
         #region Private Metods
 
@@ -337,46 +343,73 @@ namespace TestTracker
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
+            int waitTime = 25;
+            string message = string.Empty;
+
             if (_isClickRunTest)
             {
                 CreateTestQueue();
             }
 
             var testQueueRepository = new TestQueueRepository();
-            var hasRunning = testQueueRepository.HasRunning();
-
-            //if there is running queue, it's avalable to call Console App
-            if (hasRunning && _isValidRunDMMaster)
+            //if there is not completed queue, it's avalable to call Console App
+            var testQueue = testQueueRepository.RetrieveTestQueueNotCompleted();
+            if (testQueue != null && _isValidRunDMMaster)
             {
                 _messageBox.ShowOff();
-                CallConsoleApp();
-            }
 
-            //if there is a stopped queue, it's busy, and start back in 7 minutes
-            var isStopeed = _testQueueDataGrid.DataBind();
-            if(isStopeed && !_stopwatch.IsRunning)
-            {
-                _messageBox.ShowOff();
-                _messageBox.ShowMessage(MessageType.Warning, "All network lienses are busy, please wait for serveral minutes");
-                _isValidRunDMMaster = false;
+                //isRun is a flag to determine when AppConsole done (have change status), if AppConsole not done, then no call it again. 
+                if (!_isRun)
+                {
+                    _testQueueRunning = testQueue;
+                    CallConsoleApp();
+                }
+                //if failed to validate user input, do nothing
+                if(!_isValidRunDMMaster)
+                {
+                    return;
+                }
+
                 _stopwatch.Start();
+
+                //per 25 seconds, check against status of the running TestQueue
+                if (_stopwatch.Elapsed.Seconds > waitTime)
+                {
+                    //check testqueue status is updated
+                    _testQueueRunning = testQueueRepository.RetrieveTestQueue(_testQueueRunning.TestQueueId);
+                    int newStatus = _testQueueRunning.TestStatusId;
+
+                    var isStopeed = IsFailToRun(out message);
+                    if (isStopeed)
+                    {
+                        _logger.Info(message);
+                        _messageBox.ShowMessage(MessageType.Warning, message);
+                    }
+                    else if(_testQueueRunning.TestStatusId == (int)EnumTestStatus.Completed)
+                    {
+                        string successMessage = string.Format("Processed script {0} sucessfully", _testQueueRunning.ScriptName);
+                        _logger.Info(successMessage);
+                        _messageBox.ShowMessage(MessageType.Success, successMessage);
+                    }
+
+                    //refesh grid
+                    _testQueueDataGrid.DataBind();
+
+
+                    //check process App consoal done update status or yet
+                    var isRunning = testQueueRepository.IsTestQueueRunning(_testQueueRunning.TestQueueId);
+                    if (!isRunning)
+                    {
+                        _logger.Info("App Console update status");
+                        _isRun = false;
+                    }
+
+                    //refesh stopwatch
+                    _stopwatch.Stop();
+                    _stopwatch = new Stopwatch();
+                }
             }
 
-            if (_stopwatch.Elapsed.Seconds > 10 && _testQueueRunning != null)
-            {
-                _messageBox.ShowOff();
-                //update against running test quese status from STOPPED to RUNNING
-                _testQueueRunning = testQueueRepository.SelectQueueStopped();
-                _testQueueRunning.TestStatusId = (int)EnumTestStatus.Running;
-                testQueueRepository.UpdateAndSave(_testQueueRunning);
-
-                _isValidRunDMMaster = true;
-                _stopwatch.Stop();
-                _stopwatch = new Stopwatch();
-
-                string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
-                _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
-            }
         }
 
         private void CreateTestQueue()
@@ -432,7 +465,7 @@ namespace TestTracker
                     {
                         testQueue.TestStatusId = (int)EnumTestStatus.Running;
                     }
-                    testQueueRepository.Insert(testQueue);
+                    testQueueRepository.InsertTestQueue(testQueue);
                 }
                 catch(Exception ex)
                 {
@@ -447,27 +480,29 @@ namespace TestTracker
 
         private void CallConsoleApp()
         {
+            var testQueueRepository = new TestQueueRepository();
+
+            //failed to validate Test Queue
+            if (!File.Exists(_testQueueRunning.ScriptName))
+            {
+                _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
+                _isValidRunDMMaster = false;
+                return;
+            }
+            if (!File.Exists(_filePathTextBox.Text))
+            {
+                _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _filePathTextBox.Text));
+                _isValidRunDMMaster = false;
+                return;
+            }
+
+            string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
+            _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
+
             _logger.Info("Begin call Console App exe");
             try
             {
-                var testQueueRepository = new TestQueueRepository();
-                _testQueueRunning = testQueueRepository.SelectQueueRunning();
-
-                _logger.Info(String.Format("Retrieve Test Queue with ID: {0}", _testQueueRunning.TestQueueId));
-
-                if (!File.Exists(_testQueueRunning.ScriptName))
-                {
-                    _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _testQueueRunning.ScriptName));
-                    _isValidRunDMMaster = false;
-                    return;
-                }
-                if (!File.Exists(_filePathTextBox.Text))
-                {
-                    _messageBox.ShowMessage(MessageType.Warning, string.Format("File {0} is not exist", _filePathTextBox.Text));
-                    _isValidRunDMMaster = false;
-                    return;
-                }
-                _messageBox.ShowOff();
+                _logger.Info(String.Format("Retrieve Running Test Queue with ID: {0}", _testQueueRunning.TestQueueId));
 
                 var testStuffRepository = new TestStuffRepository();
                 _testStuffRunning = testStuffRepository.SelectByID(_testQueueRunning.TestStuffId);
@@ -516,10 +551,16 @@ namespace TestTracker
 
             //Assign Procesing status
             AssignNewStatus(EnumTestStatus.Processing);
+            _testQueueDataGrid.DataBind();
+
             string shortName = _testQueueRunning.ScriptName.Substring(_testQueueRunning.ScriptName.LastIndexOf("\\", _testQueueRunning.ScriptName.Length - 1) + 1);
             _messageBox.ShowMessage(MessageType.Info, string.Format("In Process... Script Name: {0}", shortName), _testQueueRunning.ScriptName);
 
+
             Process.Start(startinfo);
+            _logger.Info("Call Application Console.");
+            //after call console, set isRun = true
+            _isRun = true;
         }
 
         //private void RunScriptDefectDevice()
@@ -542,10 +583,45 @@ namespace TestTracker
         //    }
         //}
 
+        private bool IsFailToRun(out string message)
+        {
+            message = string.Empty;
+            bool isFailed = false;
+
+            switch(_testQueueRunning.TestStatusId)
+            {
+                case (int)EnumTestStatus.FailConnection:
+                    {
+                        message = STR_FAILED_TO_CONNECTION_VPN;
+                        isFailed = true;
+                        break;
+                    }
+                case (int)EnumTestStatus.BusyConnection:
+                    {
+                        message = STR_ALL_NETWORK_LIENSE_ARE_BUSY;
+                        isFailed = true;
+                        break;
+                    }
+                case (int)EnumTestStatus.WrongHBAConfig:
+                    {
+                        message = STR_WRONG_HBA_CONFIG;
+                        isFailed = true;
+                        break;
+                    }
+                case (int)EnumTestStatus.Uncompleted:
+                    {
+                        message = STR_UNCOMPLETED;
+                        isFailed = true;
+                        break;
+                    }
+            }
+            return isFailed;
+        }
+
         private void AssignNewStatus(EnumTestStatus newStatus)
         {
             var testQueueRepository = new TestQueueRepository();
-            testQueueRepository.UpdateStatus(_testQueueRunning.TestQueueId, newStatus);
+            testQueueRepository.UpdateTestQueueStatus(_testQueueRunning.TestQueueId, newStatus);
         }
 
         #endregion

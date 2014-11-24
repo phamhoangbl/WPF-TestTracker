@@ -33,7 +33,7 @@ namespace TestTracker.Controls.Messagebox
             {
                 case MessageType.Info:
                     {
-                        _messageLabel.Foreground = Brushes.WhiteSmoke;
+                        _messageLabel.Foreground = Brushes.Yellow;
                         _messageGroupBox.Header = "Info";
                         break;
                     }
