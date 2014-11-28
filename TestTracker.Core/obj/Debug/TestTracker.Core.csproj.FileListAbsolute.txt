@@ -2,8 +2,12 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\TestTracker.Core.pdb
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\EntityFramework.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\SharpSvn.dll
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\SharpSvn.UI.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\EntityFramework.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\SharpSvn.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\SharpSvn.UI.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.pdb
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\obj\Debug\TestTracker.Core.csprojResolveAssemblyReference.cache
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.Core\bin\Debug\SharpPlink-Win32.svnExe

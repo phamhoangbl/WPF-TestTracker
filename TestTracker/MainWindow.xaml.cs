@@ -34,10 +34,12 @@ namespace TestTracker
 
         private const string STR_FAILED_TO_CONNECTION_VPN = "Failed to connect server, make sure your VPN is opended";
         private const string STR_ALL_NETWORK_LIENSE_ARE_BUSY = "All network lienses are busy, please wait for serveral minutes";
-        private const string STR_WRONG_HBA_CONFIG = "Worng Port, please make sure the ports are matched";
+        private const string STR_WRONG_HBA_CONFIG = "Wrong HBA Config, check device configuration";
+        private const string STR_WRONG_PORT = "Please check if the device on the selected port works well";
         private const string STR_UNCOMPLETED = "There is an error when trying to process, please try again";
 
         #endregion
+
 
         #region Events 
 
@@ -557,26 +559,6 @@ namespace TestTracker
             _isRun = true;
         }
 
-        //private void RunScriptDefectDevice()
-        //{
-        //    string fileDMPatch = _filePathTextBox.Text;
-        //    string fileScriptPath = @"\UlinkScripts\IdentifyDevice-V1.Log";
-        //    ProcessStartInfo startinfo = new ProcessStartInfo();
-        //    startinfo.UseShellExecute = false;
-        //    startinfo.CreateNoWindow = true;
-        //    startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-        //    startinfo.FileName = fileDMPatch;
-        //    startinfo.RedirectStandardOutput = true;
-
-        //    startinfo.Arguments = string.Format(@"/s:{0} /v:{1} /d:{2} /p:{3} /l:/e", fileScriptPath, _testStuffRunning.VerdorId, _testStuffRunning.DeviceId, _testStuffRunning.Port);
-
-        //    using (Process process = Process.Start(startinfo))
-        //    {
-        //        process.Start();
-        //        process.Kill();
-        //    }
-        //}
-
         private bool IsFailToRun(out string message)
         {
             message = string.Empty;
@@ -599,6 +581,12 @@ namespace TestTracker
                 case (int)EnumTestStatus.WrongHBAConfig:
                     {
                         message = STR_WRONG_HBA_CONFIG;
+                        isFailed = true;
+                        break;
+                    }
+                case (int)EnumTestStatus.WrongPort:
+                    {
+                        message = STR_WRONG_PORT;
                         isFailed = true;
                         break;
                     }

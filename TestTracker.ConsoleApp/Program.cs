@@ -23,6 +23,12 @@ namespace TestTracker.ConsoleApp
         private const string STR_ALL_NETWORK_ARE_BUSY_TITLE = "Connection refused:";
         private const string STR_NETWORK_ARE_FAIL_TITLE = "Connection failed:";
         private const string STR_WRONG_HBA_CONFIGURATION_TITLE = "DriveMaster HBA Configuration";
+        private const string STR_WRONG_PORT_TITLE = "Please check if the DEVICE on the SELECTED port works well!";
+        //private const string STR_DRIVE_MASTER_TITLE = "DriveMaster";
+        private const string STR_DRIVE_MASTER_TITLE = "caption";
+        private const string STR_DMTEST_PATH = @"C:\DMTest";
+        private const string STR_DMTEST_SVN_PATH = @"C:\DMTestSVN";
+        private const string _STR_LOG_MESSAGE = "Moved file excels and logs";
 
         #endregion
 
@@ -70,14 +76,66 @@ namespace TestTracker.ConsoleApp
                 if (result == 0)
                 {
                     FileExport file = new FileExport();
-                    List<FileResult> listFileResult = file.CheckFileResult();
+                    List<TestUnitResult> testUnitResultList;
+                    List<TestResult> listFileResult = file.CheckFileResult(out testUnitResultList);
 
                     //check exported file
-                    //if has files, change status = Completed
                     if (listFileResult.Any())
                     {
-                        testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
-                        textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
+                        var firmwareRevision = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.FWRevision));
+                        var modelNumber = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.ModelNumber));
+                        var serialNumber = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.SerialNumber));
+
+                        //if file export doesn't have any firmwareRevision, modelNumber, or serialNUmber, return umcompleted;
+                        if(firmwareRevision == null || modelNumber == null || serialNumber == null)
+                        {
+                            testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
+                            textDebug += string.Format("Not found firmwareRevision, modelNumber, or serialNUmber", scriptName);
+                        }
+
+                        string repoSVNConnectionString = System.Configuration.ConfigurationManager.AppSettings["RepoSVNConnectionString"];
+                        string usernameSVN = System.Configuration.ConfigurationManager.AppSettings["usernameSVN"];
+                        string userPasswordSVN = System.Configuration.ConfigurationManager.AppSettings["userPasswordSVN"];
+
+                        string errorMessage;
+                        bool isUploaded = SvnSharpClient.UploadFile(repoSVNConnectionString, usernameSVN, userPasswordSVN, STR_DMTEST_PATH, STR_DMTEST_SVN_PATH, firmwareRevision.FWRevision.Trim(), modelNumber.ModelNumber.Trim(), serialNumber.SerialNumber.Trim(), string.Format("Add File excels and logs, script name: {0}, {1}", scriptName, DateTime.UtcNow.ToString("f")), out errorMessage);
+
+                        if (isUploaded)
+                        {
+                            //if done to upload file, check and store result to dataabase.
+                            var testResultRepository = new TestResultRepository();
+                            var testUnitResultRepository = new TestUnitResultRepository();
+                            foreach(var fileResult in listFileResult)
+                            {
+                                fileResult.TestQueueId = int.Parse(testQueueId);
+                                fileResult.CreatedDateUtc = DateTime.UtcNow;
+                                testResultRepository.InsertTestResult(fileResult);
+                            }
+
+                            foreach(var testUnitResult in testUnitResultList)
+                            {
+                                testUnitResult.TestQueueId = int.Parse(testQueueId);
+                                testUnitResult.CreatedDateUtc = DateTime.UtcNow;
+                                testUnitResultRepository.InsertTestUnitResult(testUnitResult);
+                            }
+
+                            testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);
+                            textDebug += string.Format("Done: Updated Status Queue is completed for {0}***", scriptName);
+                        }
+                        else
+                        {
+                            //Fails to connect VPN
+                            if (errorMessage.Contains("Unable to connect to a repository at URL"))
+                            {
+                                testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.FailConnection);
+                                textDebug += string.Format("Not Done: Upload file has problems: {0}", errorMessage);
+                            }
+                            else
+                            {
+                                testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.FailConnection);
+                                textDebug += string.Format("Not Done: Upload file has problems: {0}", errorMessage);
+                            }
+                        }
                     }
                     //if not, change status = UmCompleted
                     else
@@ -101,12 +159,18 @@ namespace TestTracker.ConsoleApp
                     testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.WrongHBAConfig);
                     textDebug += "Not Done: Wrong HBA Config, check device configuration";
                 }
+                else if (result == 4)
+                {
+                    testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.WrongPort);
+                    textDebug += "Not Done: Wrong Port, please check if the device on the selected port works well";
+                }
+
                 textDebug += "---------------------------------------";
                 _logger.Info(textDebug);
             }
             catch(Exception ex)
             {
-                _logger.Info(string.Format("Error when trying to update status: {0}", ex.Message));
+                _logger.Error(string.Format("Error when trying to update status: {0}", ex.Message));
                 testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Uncompleted);
             }
 
@@ -126,14 +190,14 @@ namespace TestTracker.ConsoleApp
             startinfo.WindowStyle = ProcessWindowStyle.Hidden;
             startinfo.FileName = filePatch;
             startinfo.RedirectStandardOutput = true;
-            string arguments = string.Format(@"/s:""{0}"" /v:""{1}"" /D:""{2}"" /P:""{3}"" /l:/e", scriptName, verdorId, deviceId, port);
+            string arguments = string.Format(@"/s:{0} /v:{1} /D:{2} /P:{3} /l:/e", scriptName, verdorId, deviceId, port);
             startinfo.Arguments = arguments;
-            _logger.Info(string.Format("File patch: {0}, file name: {1}", filePatch, arguments));
+            _logger.Info(string.Format("File patch: {0}, arguments: {1}", filePatch, arguments));
 
             //Assign Procesing status
             Process.Start(startinfo);
             //wait for 25 s to DM process start
-            Thread.Sleep(25000);
+            Thread.Sleep(1000);
 
             _logger.Info(string.Format(string.Format("Done call DM Master app", DateTime.UtcNow)));
 
@@ -159,6 +223,24 @@ namespace TestTracker.ConsoleApp
                     _logger.Info(string.Format(string.Format("Wrong HBA Configuration {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 3;
+                }
+                if (theprocess.MainWindowTitle.Contains(STR_WRONG_PORT_TITLE))
+                {
+                    _logger.Info(string.Format(string.Format("Wrong HBA Configuration {0}", DateTime.UtcNow)));
+                    theprocess.Kill();
+                    result = 4;
+                }
+                
+            }
+
+            //check if DM processing is done or yet
+            bool isFinished = false;
+            while (!isFinished)
+            {
+                Process[] processes = Process.GetProcesses();
+                if (!processes.Any(x => x.MainWindowTitle.Contains(STR_DRIVE_MASTER_TITLE)))
+                {
+                    isFinished = true;
                 }
             }
         }

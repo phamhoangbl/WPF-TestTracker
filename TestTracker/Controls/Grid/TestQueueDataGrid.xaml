@@ -13,7 +13,6 @@
         <local:ForeBackgroundConverter x:Key="ToForeBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
-        <Label Content="gagag" Foreground="Red"></Label>
         <DataGrid x:Name="_testQueueDataGrid" Background="#FF393939" BorderThickness="0" BorderBrush="DarkCyan"
                   HeadersVisibility="Column" Foreground="WhiteSmoke" AutoGenerateColumns="False"
             ItemsSource="{Binding TestQueues}" IsReadOnly="True">

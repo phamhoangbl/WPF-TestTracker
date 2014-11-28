@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +37,14 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="SharpSvn, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSvn.UI, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=33789aa53ca44aa9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -47,8 +56,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Model\TestStuff.cs" />
+    <Compile Include="Data\Model\TestUnitResult.cs" />
+    <Compile Include="Data\Repository\ITestResultRepository.cs" />
     <Compile Include="Data\Repository\ITestStuffRepository.cs" />
+    <Compile Include="Data\Repository\ITestUnitResultRepository.cs" />
+    <Compile Include="Data\Repository\TestResultRepository.cs" />
     <Compile Include="Data\Repository\TestStuffRepository.cs" />
+    <Compile Include="Data\Repository\TestUnitResultRepository.cs" />
     <Compile Include="Data\TestTrackerContext.cs" />
     <Compile Include="Data\Model\TestQueue.cs" />
     <Compile Include="Data\Repository\ITestQueueRepository.cs" />
@@ -56,7 +70,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CsvReader.cs" />
     <Compile Include="Utils\EnumTest.cs" />
-    <Compile Include="Utils\FilleResultTemplate.cs" />
+    <Compile Include="Data\Model\TestResult.cs" />
+    <Compile Include="Utils\FileExport.cs" />
+    <Compile Include="Utils\SvnSharpClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
