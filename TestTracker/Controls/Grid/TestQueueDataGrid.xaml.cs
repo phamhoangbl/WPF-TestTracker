@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestTracker.Core.Data.Model;
 using TestTracker.Core.Utils;
+using TestTracker.HandleEvents;
 
 namespace TestTracker.Controls.Grid
 {
@@ -40,5 +41,16 @@ namespace TestTracker.Controls.Grid
 
             return testQueues.SourceCollection.Cast<TestQueue>().ToList().Any(x=>x.TestStatusId == (int)EnumTestStatus.Stopped);
         }
+
+        public void Rebind()
+        {
+        }
+
+        protected void Feedback_Received(object sender, TextArgs e)
+        {
+            
+        }
+
     }
+
 }

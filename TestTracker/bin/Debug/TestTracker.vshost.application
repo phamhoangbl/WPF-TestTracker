@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TestTracker.exe.manifest" size="11656">
+    <dependentAssembly dependencyType="install" codebase="TestTracker.exe.manifest" size="12466">
       <assemblyIdentity name="TestTracker.exe" version="1.0.0.73" publicKeyToken="0000000000000000" language="vi-VN" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bpetMFMyoKmBuC5to3D7YkW1UY0kWI4w444nlgCRxNk=</dsig:DigestValue>
+        <dsig:DigestValue>rS0Ng0jGCJ8qY5u/ut8PkRWznbTJ0aLb90zgIBvmaMc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

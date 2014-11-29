@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="TestTracker.Controls.Editor.TestQueueEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinHeight="150" Width="600">
+    <Grid>
+        <Canvas HorizontalAlignment="Left" Width="0">
+            <StackPanel Canvas.Top="10">
+                <Label Content="Platform" HorizontalAlignment="Left" Margin="4,4,4,4" VerticalAlignment="Top"/>
+                <ComboBox Name="_platformCombobox" Margin="4" Width="276" SelectedValuePath="Tag" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="INTEL 6 Series(A) VID:0x8086 DID:0x1C02" Tag="8086-1C02" />
+                    <ComboBoxItem Content="INTEL 5 Series(A) VID:0x8086 DID:0x3B22" Tag="8086-3B22" />
+                    <ComboBoxItem Content="INTEL ICH10(A) VID:0x8086 DID:0x3A22" Tag="8086-3A22" />
+                    <ComboBoxItem Content="INTEL ICH9(A) VID:0x8086 DID:0x2922" Tag="8086-0x2922" />
+                    <ComboBoxItem Content="Silicon Image 3132 VID:0x1095 DID:0x3132" Tag="1095-3132" />
+                    <ComboBoxItem Content="Silicon Image 3134 VID:0x1095 DID:0x3124" Tag="1095-3124" />
+                    <ComboBoxItem Content="INTEL ICH8 w/Legacy VID:0x8086 DID:0x2820" Tag="8086-2820" />
+                    <ComboBoxItem Content="INTEL ICH8 w/Enhance VID:0x8086 DID:0x2825" Tag="8086-2825" />
+                    <ComboBoxItem Content="INTEL ICH8(A) 6 ports VID:0x8086 DID:0x2821" Tag="8086-2821" />
+                    <ComboBoxItem Content="INTEL ICH8(A) 4 ports VID:0x8086 DID:0x2824" Tag="8086-2824" />
+                    <ComboBoxItem Content="INTEL ICH8(R) VID:0x8086 DID:0x2822" Tag="8086-2822" />
+                    <ComboBoxItem Content="INTEL ICH7(A) (SATA) VID:0x8086 DID:0x27C1" Tag="8086-27C1" />
+                    <ComboBoxItem Content="INTEL ICH7(R) (SATA) VID:0x8086 DID:0x27C3" Tag="8086-27C3" />
+                    <ComboBoxItem Content="INTEL ICH7(SATA) VID:0x8086 DID:0x27C0" IsSelected="true" Tag="8086-27C0" />
+                    <ComboBoxItem Content="INTEL ICH7X(PATA) VID:0x8086 DID:0x27DF" Tag="8086-27DF" />
+                    <ComboBoxItem Content="INTEL ICH6R(A) (SATA) VID:0x8086 DID:0x2652" Tag="8086-2652" />
+                    <ComboBoxItem Content="INTEL ICH6 (SATA) VID:0x8086 DID:0x2651" Tag="8086-2651" />
+                    <ComboBoxItem Content="INTEL ICH6M (SATA) VID:0x8086 DID:0x2653" Tag="8086-2653" />
+                    <ComboBoxItem Content="INTEL ICH6X (PATA) VID:0x8086 DID:0x266f" Tag="8086-266f" />
+                    <ComboBoxItem Content="INTEL ICH5 (SATA) VID:0x8086 DID:0x24d1" Tag="8086-24d1" />
+                    <ComboBoxItem Content="INTEL ICH5R (SATA) VID:0x8086 DID:0x24df" Tag="8086-24df" />
+                    <ComboBoxItem Content="INTEL ICH5X (SATA) VID:0x8086 DID:0x24db" Tag="8086-24db" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Canvas.Top="70" HorizontalAlignment="Left" Width="300">
+                <DockPanel HorizontalAlignment="Left">
+                    <StackPanel>
+                        <Label Content="Port" HorizontalAlignment="Left" Margin="4,4,4,4" VerticalAlignment="Top"/>
+                        <ComboBox Name="_port" Margin="4" Width="70" HorizontalAlignment="Left" SelectedValuePath="Tag">
+                            <ComboBoxItem Content="Port 0" Tag="0" IsSelected="true" />
+                            <ComboBoxItem Content="Port 1" Tag="1" />
+                            <ComboBoxItem Content="Port 2" Tag="2" />
+                            <ComboBoxItem Content="Port 3" Tag="3" />
+                            <ComboBoxItem Content="Port 4" Tag="4" />
+                            <ComboBoxItem Content="Port 5" Tag="5" />
+                            <ComboBoxItem Content="Port 6" Tag="6" />
+                            <ComboBoxItem Content="Port 7" Tag="7" />
+                            <ComboBoxItem Content="Port 8" Tag="8" />
+                            <ComboBoxItem Content="Port 9" Tag="9" />
+                            <ComboBoxItem Content="Port 10" Tag="10" />
+                        </ComboBox>
+                    </StackPanel>
+                    <Button x:Name="_saveButton" Width="180" Height="30" FontSize="12" Margin="20,15,0,0" IsDefault="True" Content="Save HBA Configuration" Click="Save_Click"  />
+                </DockPanel>
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</UserControl>

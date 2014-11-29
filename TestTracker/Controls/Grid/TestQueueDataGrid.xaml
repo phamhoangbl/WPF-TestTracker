@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestTracker.DataConverter"
              mc:Ignorable="d" 
+             xmlns:testQueueEditor="clr-namespace:TestTracker.Controls.Editor"
              xmlns:l="clr-namespace:TestTracker.Controls.Grid" Width="773" Height="450"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -36,14 +37,19 @@
                     Binding="{Binding Path=StartedTime}" Header="Started Time" />
                 <DataGridTextColumn
                     Binding="{Binding Path=FinishedTime}" Header="Finished Time" />
-                <DataGridTextColumn
-                    Binding="{Binding Path=TestResultId}" Header="Result" />
+                <DataGridTemplateColumn Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="Edit" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
-            <!--<DataGrid.RowDetailsTemplate>
+            <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding ScriptName}" Foreground="Red" />
+                    <testQueueEditor:TestQueueEditor x:Name="_testQueueDataGrid" SelectedItem="{Binding TestStuffId}" Feedback="Feedback_Received" ></testQueueEditor:TestQueueEditor>
                 </DataTemplate>
-            </DataGrid.RowDetailsTemplate>-->
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </UserControl>

@@ -80,3 +80,5 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\SharpSvn.dll
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\SharpSvn.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\SharpPlink-Win32.svnExe
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\TestQueueEditor.baml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\TestQueueEditor.g.cs
