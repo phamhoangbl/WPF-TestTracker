@@ -22,6 +22,8 @@ using TestTracker.Core.Data.Model;
 using TestTracker.Core.Data.Repository;
 using TestTracker.Core.Utils;
 using TestTracker.Controls.Messagebox;
+using TestTracker.HandleEvents;
+using System.Threading;
 
 namespace TestTracker
 {
@@ -153,6 +155,25 @@ namespace TestTracker
 
         #endregion
 
+
+        #region Custom Events
+
+        protected void Finished_Invoike(object sender, MessageArgs e)
+        {
+            if(e.IsSuccess)
+            {
+                _messageBox.ShowMessage(MessageType.Success, e.Message);
+                _isValidRunDMMaster = true;
+            }
+            else
+            {
+                _messageBox.ShowMessage(MessageType.Error, e.Message);
+                _isValidRunDMMaster = true;
+            }
+        }
+
+
+        #endregion
 
         #region Private Metods
 

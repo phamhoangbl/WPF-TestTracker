@@ -109,14 +109,14 @@
     <Compile Include="Controls\Editor\TestQueueEditor.xaml.cs">
       <DependentUpon>TestQueueEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Grid\TestQueueViewModel.cs" />
+    <Compile Include="Controls\Editor\Grid\TestQueueViewModel.cs" />
     <Compile Include="Controls\Loading\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Loading\LoadingAnimation.xaml.cs">
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Grid\TestQueueDataGrid.xaml.cs">
+    <Compile Include="Controls\Editor\Grid\TestQueueDataGrid.xaml.cs">
       <DependentUpon>TestQueueDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messagebox\MessageBox.xaml.cs">
@@ -125,7 +125,7 @@
     <Compile Include="DataConverter\ForeBackgroundConverter.cs" />
     <Compile Include="DataConverter\ShortScriptNameConverter.cs" />
     <Compile Include="DataConverter\TestStatusConverter.cs" />
-    <Compile Include="HandleEvents\TextArg.cs" />
+    <Compile Include="HandleEvents\CustomEventArgs.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Themes\WindowResizer.cs" />
     <Compile Include="Themes\WindowStyle.xaml.cs">
@@ -143,7 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Grid\TestQueueDataGrid.xaml">
+    <Page Include="Controls\Editor\Grid\TestQueueDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

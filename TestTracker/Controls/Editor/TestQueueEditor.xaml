@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             MinHeight="150" Width="600">
+             MinHeight="140" Width="600">
     <Grid>
         <Canvas HorizontalAlignment="Left" Width="0">
             <StackPanel Canvas.Top="10">

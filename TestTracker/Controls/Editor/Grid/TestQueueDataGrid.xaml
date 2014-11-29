@@ -37,17 +37,17 @@
                     Binding="{Binding Path=StartedTime}" Header="Started Time" />
                 <DataGridTextColumn
                     Binding="{Binding Path=FinishedTime}" Header="Finished Time" />
-                <DataGridTemplateColumn Header="Edit">
+                <DataGridTemplateColumn Header="Edit HBA Configuration">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="Edit" HorizontalAlignment="Center"/>
+                            <Label Content="Edit" HorizontalAlignment="Center" Foreground="LightGreen"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <testQueueEditor:TestQueueEditor x:Name="_testQueueDataGrid" SelectedItem="{Binding TestStuffId}" Feedback="Feedback_Received" ></testQueueEditor:TestQueueEditor>
+                    <testQueueEditor:TestQueueEditor x:Name="_testQueueDataGrid" TestQueueId="{Binding TestQueueId}" Feedback="Feedback_Received" ></testQueueEditor:TestQueueEditor>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>

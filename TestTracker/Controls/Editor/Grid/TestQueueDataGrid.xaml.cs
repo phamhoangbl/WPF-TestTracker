@@ -23,6 +23,7 @@ namespace TestTracker.Controls.Grid
     /// </summary>
     public partial class TestQueueDataGrid : UserControl
     {
+        public event EventHandler<MessageArgs> FinishedUpdate;
         public TestQueueDataGrid()
         {
             InitializeComponent();
@@ -42,13 +43,28 @@ namespace TestTracker.Controls.Grid
             return testQueues.SourceCollection.Cast<TestQueue>().ToList().Any(x=>x.TestStatusId == (int)EnumTestStatus.Stopped);
         }
 
-        public void Rebind()
+        //Custome event Test Queue Editor
+        protected void Feedback_Received(object sender, InVoke e)
         {
+            try
+            {
+                DataBind();
+                RaiseFinishedUpdate("Updated Test Queuesuccessfully.", true);
+            }
+            catch(Exception)
+            {
+                RaiseFinishedUpdate("Fails to update Test Queue successfully.", false);
+            }
         }
 
-        protected void Feedback_Received(object sender, TextArgs e)
+        //Custom event Show Message box
+        private void RaiseFinishedUpdate(string p, bool isSuccess)
         {
-            
+            EventHandler<MessageArgs> handler = FinishedUpdate;
+            if (handler != null)
+            {
+                handler(null, new MessageArgs(p, isSuccess));
+            }
         }
 
     }

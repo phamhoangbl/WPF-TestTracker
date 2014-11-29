@@ -57,7 +57,6 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Themes\WindowStyleXP.baml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Loading\Block.g.cs
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Loading\LoadingAnimation.g.cs
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Grid\TestQueueDataGrid.g.cs
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Messagebox\MessageBox.g.cs
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\MainWindow.g.cs
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Themes\WindowStyle.g.cs
@@ -68,7 +67,6 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker_MarkupCompile.lref
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\App.baml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Loading\LoadingAnimation.baml
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Grid\TestQueueDataGrid.baml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\MainWindow.baml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker.g.resources
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\TestTracker.Properties.Resources.resources
@@ -82,3 +80,5 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\bin\Debug\SharpPlink-Win32.svnExe
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\TestQueueEditor.baml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\TestQueueEditor.g.cs
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\Grid\TestQueueDataGrid.g.cs
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker\obj\Debug\Controls\Editor\Grid\TestQueueDataGrid.baml

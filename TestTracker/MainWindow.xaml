@@ -116,7 +116,7 @@
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Canvas.Top="190" Canvas.Left="4">
-                    <testQueueDataGrid:TestQueueDataGrid x:Name="_testQueueDataGrid" ></testQueueDataGrid:TestQueueDataGrid>
+                    <testQueueDataGrid:TestQueueDataGrid x:Name="_testQueueDataGrid" FinishedUpdate="Finished_Invoike"></testQueueDataGrid:TestQueueDataGrid>
                 </StackPanel>
             </Canvas>
 

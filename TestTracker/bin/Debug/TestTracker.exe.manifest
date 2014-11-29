@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1088512">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1090560">
       <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Zb4O7Iz/VRNd8doQUfVu+YREKnY5abxspq9KAb5q+1w=</dsig:DigestValue>
+        <dsig:DigestValue>2wUJnWZ8JQEsolGY0RZ6Lou61pRibnnQrN5iprCrQpY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
