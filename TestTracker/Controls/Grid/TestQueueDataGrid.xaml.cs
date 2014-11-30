@@ -67,6 +67,17 @@ namespace TestTracker.Controls.Grid
             }
         }
 
+        private void ViewTestResult_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1) //Note that this is a lie, this does not check for a "real" click
+            {
+                TestQueueDataGrid ui = new TestQueueDataGrid();
+                MainWindow newWindow = new MainWindow();
+                newWindow.Content = ui;
+                newWindow.Show();
+            }
+        }
+
     }
 
 }

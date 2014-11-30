@@ -18,10 +18,10 @@ C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTra
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\NLog.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\SharpSvn.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\SharpSvn.UI.xml
+C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\SharpPlink-Win32.svnExe
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.csprojResolveAssemblyReference.cache
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.TrustInfo.xml
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.exe.manifest
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.application
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.exe
 C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\obj\Debug\TestTracker.ConsoleApp.pdb
-C:\Users\johnhoang\Documents\Visual Studio 2013\Projects\TestTracker\WPF-TestTracker\TestTracker.ConsoleApp\bin\Debug\SharpPlink-Win32.svnExe

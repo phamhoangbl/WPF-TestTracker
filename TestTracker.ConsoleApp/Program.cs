@@ -78,10 +78,14 @@ namespace TestTracker.ConsoleApp
                     FileExport file = new FileExport();
                     List<TestUnitResult> testUnitResultList;
                     List<TestResult> listFileResult = file.CheckFileResult(out testUnitResultList);
+                    textDebug += string.Format("Moved folder export DMTest for {0}***", scriptName);
 
                     //check exported file
                     if (listFileResult.Any())
                     {
+
+                        textDebug += string.Format("Begin store file result***");
+
                         var firmwareRevision = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.FWRevision));
                         var modelNumber = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.ModelNumber));
                         var serialNumber = listFileResult.FirstOrDefault(x => !string.IsNullOrEmpty(x.SerialNumber));

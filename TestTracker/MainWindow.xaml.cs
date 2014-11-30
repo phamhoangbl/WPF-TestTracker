@@ -51,6 +51,7 @@ namespace TestTracker
         private bool _isClickRunTest;
         private bool _isValidRunDMMaster;
         private bool _isRun;
+        private bool _isProcessedSomeTestQueue = false;
         Stopwatch _stopwatch;
         System.Windows.Threading.DispatcherTimer _dispatcherTimer;
 
@@ -174,6 +175,7 @@ namespace TestTracker
 
 
         #endregion
+
 
         #region Private Metods
 
@@ -372,6 +374,7 @@ namespace TestTracker
             var testQueue = testQueueRepository.RetrieveTestQueueNotCompleted();
             if (testQueue != null && _isValidRunDMMaster)
             {
+                _isProcessedSomeTestQueue = true;
                 _messageBox.ShowOff();
 
                 //isRun is a flag to determine when AppConsole done (have change status), if AppConsole not done, then no call it again. 
@@ -400,30 +403,34 @@ namespace TestTracker
                     {
                         _logger.Info(message);
                         _messageBox.ShowMessage(MessageType.Warning, message);
+                        _isRun = false;
                     }
-                    else if(_testQueueRunning.TestStatusId == (int)EnumTestStatus.Completed)
+                    else if (_testQueueRunning.TestStatusId == (int)EnumTestStatus.Completed)
                     {
                         string successMessage = string.Format("Processed script {0} sucessfully", _testQueueRunning.ScriptName);
                         _logger.Info(successMessage);
                         _messageBox.ShowMessage(MessageType.Success, successMessage);
+                        _isRun = false;
+                    }
+                    else if(_testQueueRunning.TestStatusId == (int)EnumTestStatus.Running || _testQueueRunning.TestStatusId == (int)EnumTestStatus.Processing)
+                    {
+                        _isRun = true;
                     }
 
                     //refesh grid
                     _testQueueDataGrid.DataBind();
 
-
-                    //check process App consoal done update status or yet
-                    var isRunning = testQueueRepository.IsTestQueueRunning(_testQueueRunning.TestQueueId);
-                    if (!isRunning)
-                    {
-                        _logger.Info("App Console update status");
-                        _isRun = false;
-                    }
-
                     //refesh stopwatch
                     _stopwatch.Stop();
                     _stopwatch = new Stopwatch();
                 }
+            }
+            //if isRun = false, that mean test status = completed, then do refesh
+            else if (_isProcessedSomeTestQueue)
+            {
+                //refesh grid
+                _testQueueDataGrid.DataBind();
+                _isProcessedSomeTestQueue = false;
             }
 
         }
@@ -525,9 +532,6 @@ namespace TestTracker
                 _testStuffRunning = testStuffRepository.SelectByID(_testQueueRunning.TestStuffId);
                 _logger.Info(String.Format("Retrieve Test Stuff with ID: {0}", _testStuffRunning.TestStuffId));
 
-                //Run Script to defect device
-                //RunScriptDefectDevice();
-                //Run Test Script User chosen
                 RunTestScript();
             }
             catch (Exception ex)

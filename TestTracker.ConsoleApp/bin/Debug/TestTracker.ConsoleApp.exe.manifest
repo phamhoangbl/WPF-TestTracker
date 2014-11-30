@@ -121,7 +121,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>F8k3IEQFaUy+GOAd72r9MN4gPPq6W8rIaXm571Wm2Z8=</dsig:DigestValue>
+        <dsig:DigestValue>JY2MaT6ytN1n8fJBu5SaoLgwFXRbwE9AEiNW8Ll4ZVI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -133,7 +133,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Sy9T1rjTe/vpGW5T/8+l9xbJLYDDm7FG6+7fVvqwnQ4=</dsig:DigestValue>
+        <dsig:DigestValue>bTOertb12lOCAf6OXKLYJ5KzPWty5p9SpGxzcHxz8v4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -146,13 +146,13 @@
       <dsig:DigestValue>tC4d10Klu8R9nBnOm880BdcpiS0CDJpxAkxw4wcFlyY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TestTracker.ConsoleApp.exe.config" size="2758">
+  <file name="TestTracker.ConsoleApp.exe.config" size="2712">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9PCVCYgqs2da6kaqfImmZOrBNOfCvTwrQK7urPoDmog=</dsig:DigestValue>
+      <dsig:DigestValue>9SbFi3/A9K+vHA43wTfSNaWIbLHVeO+8CZULehKUo7w=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

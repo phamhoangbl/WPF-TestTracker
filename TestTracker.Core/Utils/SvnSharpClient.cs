@@ -18,7 +18,7 @@ namespace TestTracker.Core.Utils
             {
                 try
                 {
-                    client.Authentication.DefaultCredentials = new System.Net.NetworkCredential("Auto.Tester", "12345");
+                    client.Authentication.DefaultCredentials = new System.Net.NetworkCredential(userNameSvn, passwordUserSvn);
                     var uri = client.GetUriFromWorkingCopy(dMTestSVNPath);
 
                     //check if 
@@ -72,6 +72,7 @@ namespace TestTracker.Core.Utils
                 }
                 catch (Exception ex)
                 {
+                    client.CleanUp(dMTestSVNPath);
                     errorMessage = ex.InnerException.Message;
                     return false;
                 }
