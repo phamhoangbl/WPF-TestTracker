@@ -30,6 +30,11 @@ namespace TestTracker.Core.Data.Repository
             return db.TestUnitResults.Find(id);
         }
 
+        public List<TestUnitResult> RetrieveTestUnitResultByTestQueue(int testQueueId)
+        {
+            return db.TestUnitResults.Where(x => x.TestQueueId == testQueueId).OrderBy(x => x.TestQueueId).ToList();
+        }
+
         public void InsertTestUnitResult(TestUnitResult obj)
         {
             db.TestUnitResults.Add(obj);

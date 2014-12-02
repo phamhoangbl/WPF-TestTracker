@@ -374,7 +374,6 @@ namespace TestTracker
             var testQueue = testQueueRepository.RetrieveTestQueueNotCompleted();
             if (testQueue != null && _isValidRunDMMaster)
             {
-                _isProcessedSomeTestQueue = true;
                 _messageBox.ShowOff();
 
                 //isRun is a flag to determine when AppConsole done (have change status), if AppConsole not done, then no call it again. 
@@ -429,6 +428,10 @@ namespace TestTracker
             else if (_isProcessedSomeTestQueue)
             {
                 //refesh grid
+                string successMessage = string.Format("Processed script {0} sucessfully", _testQueueRunning.ScriptName);
+                _logger.Info(successMessage);
+                _messageBox.ShowMessage(MessageType.Success, successMessage);
+
                 _testQueueDataGrid.DataBind();
                 _isProcessedSomeTestQueue = false;
             }
@@ -533,6 +536,8 @@ namespace TestTracker
                 _logger.Info(String.Format("Retrieve Test Stuff with ID: {0}", _testStuffRunning.TestStuffId));
 
                 RunTestScript();
+
+                _isProcessedSomeTestQueue = true;
             }
             catch (Exception ex)
             {

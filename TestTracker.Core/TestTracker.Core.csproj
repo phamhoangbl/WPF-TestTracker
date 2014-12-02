@@ -55,11 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Model\TestResultDocument.cs" />
     <Compile Include="Data\Model\TestStuff.cs" />
     <Compile Include="Data\Model\TestUnitResult.cs" />
+    <Compile Include="Data\Repository\ITestResultDocumentRepository.cs" />
     <Compile Include="Data\Repository\ITestResultRepository.cs" />
     <Compile Include="Data\Repository\ITestStuffRepository.cs" />
     <Compile Include="Data\Repository\ITestUnitResultRepository.cs" />
+    <Compile Include="Data\Repository\TestResultDocumentRepository.cs" />
     <Compile Include="Data\Repository\TestResultRepository.cs" />
     <Compile Include="Data\Repository\TestStuffRepository.cs" />
     <Compile Include="Data\Repository\TestUnitResultRepository.cs" />

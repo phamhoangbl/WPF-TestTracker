@@ -160,28 +160,6 @@ namespace TestTracker.Core.Data.Repository
              var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
              return db.TestQueues.Any(x => x.TestQueueId == testQueueId && x.TestStatusId == (int)EnumTestStatus.Running && testStuffId.Contains(x.TestStuffId));
          }
-         //public TestQueue MakeQueueRunning()
-         //{
-         //    var testStuffId = db.TestStuffs.Where(x => x.ComputerName == System.Environment.MachineName).Select(x => x.TestStuffId);
-         //    var testQueueNext = db.TestQueues.OrderBy(x => x.TestQueueId).FirstOrDefault(x => testStuffId.Contains(x.TestStuffId) && (x.TestStatusId == (int)EnumTestStatus.Pending
-         //                                                                                           || x.TestStatusId == (int)EnumTestStatus.Uncompleted));
-         //    if (testQueueNext != null)
-         //    {
-         //        testQueueNext.TestStatusId = (int)EnumTestStatus.Running;
-         //        UpdateAndSaveTestQueue(testQueueNext);
-         //    }
-
-         //    return testQueueNext;
-         //}
-
-         //public TestQueue MakeQueueRunning(int testQueueProcessingId)
-         //{
-         //    TestQueue processingQueue = SelectTestQueueByID(testQueueProcessingId);
-         //    processingQueue.TestStatusId = (int)EnumTestStatus.Running;
-         //    UpdateAndSaveTestQueue(processingQueue);
-
-         //    return processingQueue;
-         //}
 
          public TestQueue RetrieveTestQueue(int id)
          {

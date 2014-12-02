@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace TestTracker.Core.Data.Model
     [Table("TestResult")]
     public class TestResult
     {
+        [Key]
         public int TestResultId { get; set; }
         public int TestQueueId { get; set; }
         public string FileName { get; set; }

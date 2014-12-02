@@ -13,5 +13,6 @@ namespace TestTracker.Core.Data.Model
         public DbSet<TestStuff> TestStuffs { get; set; }
         public DbSet<TestResult> TestResults { get; set; }
         public DbSet<TestUnitResult> TestUnitResults { get; set; }
+        public DbSet<TestResultDocument> TestResultDocuments { get; set; }
     }
 }

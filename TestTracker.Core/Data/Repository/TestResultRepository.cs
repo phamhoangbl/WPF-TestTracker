@@ -28,6 +28,12 @@ namespace TestTracker.Core.Data.Repository
         {
             return db.TestResults.Find(id);
         }
+
+        public List<TestResult> RetrieveTestResultByTestQueueId(int testQueueId)
+        {
+            return db.TestResults.Where(x => x.TestQueueId == testQueueId).OrderBy(x => x.TestQueueId).ToList();
+        }
+
         public void InsertTestResult(TestResult obj)
         {
             db.TestResults.Add(obj);

@@ -103,26 +103,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1091072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.exe" size="1105920">
       <assemblyIdentity name="TestTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>B9nDZevzjGcSIrdaeHdC4gjPVAbaFX1SDQTWZGRcN3w=</dsig:DigestValue>
+        <dsig:DigestValue>n/Z+cB/FOrKwywhuN66d0J5V6W/t3Q0ZyxFV1PJ1+QA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="42496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="45568">
       <assemblyIdentity name="TestTracker.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bTOertb12lOCAf6OXKLYJ5KzPWty5p9SpGxzcHxz8v4=</dsig:DigestValue>
+        <dsig:DigestValue>g7OLHUUjzF5ZVEosM4lKAzXC92ZUAUcV9jIXsZ7mkhc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -189,13 +189,13 @@
       <dsig:DigestValue>Ppc7w1PdUSFdBRyMYo/T0Q2brdtU+k2wiNc+H6aatLw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="15360">
+  <file name="ConsoleApp\TestTracker.ConsoleApp.exe" size="15872">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SiVfq+WpxMAzB3wVQ8mDriQMJ8figKJbmSpxxP17nSQ=</dsig:DigestValue>
+      <dsig:DigestValue>kQ7CHh51NeOb4HWmRtYDx1XBtghoGg+aRFzqK3OADr0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ConsoleApp\TestTracker.ConsoleApp.exe.config" size="2712">
@@ -204,16 +204,16 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9SbFi3/A9K+vHA43wTfSNaWIbLHVeO+8CZULehKUo7w=</dsig:DigestValue>
+      <dsig:DigestValue>X8FYICasRcsBBesDT38dzMr9jsmqSoewO19YNGZHrGE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ConsoleApp\TestTracker.Core.dll" size="42496">
+  <file name="ConsoleApp\TestTracker.Core.dll" size="45568">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>j2ycdnGXR2eucbSr03jYca2fy8qT3T4vzGJSP6eSEp8=</dsig:DigestValue>
+      <dsig:DigestValue>YacLuM5IPs9S7YyssAzkYWjTGbIj6O7ZIB5ASeGrzN0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="NLog.config" size="983">
@@ -231,7 +231,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>f9wgRqqqhRUObg955hr+UD4r41j+rluF/eH2u/t7FLo=</dsig:DigestValue>
+      <dsig:DigestValue>i98EBpsBaUmGfrGsYdFobcKjMpD0ch8h8mgqcL/v9zk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Viritum-Logo.ico" size="5430">

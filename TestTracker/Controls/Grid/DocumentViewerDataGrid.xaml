@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="TestTracker.Controls.Grid.DocumentViewerDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestTracker.DataConverter"
+             mc:Ignorable="d" d:DesignWidth="600" Height="540">
+    <UserControl.Resources>
+        <local:ShortScriptNameConverter x:Key="ToShortScriptNameConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid x:Name="_documentViewerDataGrid" Background="#FF393939" BorderThickness="0" BorderBrush="DarkCyan"
+                  HeadersVisibility="Column" Foreground="WhiteSmoke" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="File Name" Width="375">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding FileName, Converter={StaticResource ToShortScriptNameConverter}}" HorizontalAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="View Details" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="View_Click" CommandParameter="{Binding FileName}" Content="View" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

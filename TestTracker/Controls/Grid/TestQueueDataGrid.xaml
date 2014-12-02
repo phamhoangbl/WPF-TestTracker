@@ -40,24 +40,17 @@
                 <DataGridTemplateColumn Header="Edit HBA Configuration">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="Edit" HorizontalAlignment="Center" Foreground="LightGreen"/>
+                            <Button CommandParameter="{Binding TestQueueId}" Content="Edit"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="View Test Result">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="View" HorizontalAlignment="Center" Foreground="LightGreen" MouseLeftButtonUp="ViewTestResult_MouseLeftButtonUp"/>
+                            <Button Click="View_Click" CommandParameter="{Binding TestQueueId}" Content="View" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!--<DataGridTemplateColumn Header="Test Result">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding TestQueueId, Converter={StaticResource ToTestStatusString}}"  HorizontalAlignment="Center" Foreground="LightGreen"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>

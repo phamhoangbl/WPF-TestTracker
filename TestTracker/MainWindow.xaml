@@ -10,7 +10,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Style="{DynamicResource SkinWindowStyle}"
         Title="Virtium - Test Tracker" 
-        Icon="Resources\Viritum-Logo.ico" Width="1220" Height="700.671">
+        Icon="Resources\Viritum-Logo.ico" Width="1220" Height="700">
     <Window.Resources>
         <sys:String x:Key="strFilePath">C:\Program Files (x86)\ULINK DM2012 PRO NET\v950\DriveMaster.exe</sys:String>
         <!--<sys:String x:Key="strFilePath">C:\Users\johnhoang\Desktop\Watch.exe</sys:String>-->
@@ -119,7 +119,6 @@
                     <testQueueDataGrid:TestQueueDataGrid x:Name="_testQueueDataGrid" FinishedUpdate="Finished_Invoike"></testQueueDataGrid:TestQueueDataGrid>
                 </StackPanel>
             </Canvas>
-
         </Grid>
     </ac:AdornedControl>
 </Window>

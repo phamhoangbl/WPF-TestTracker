@@ -11,9 +11,10 @@ namespace TestTracker.Core.Utils
 {
     public static class SvnSharpClient
     {
-        public static bool UploadFile(string svnRepo, string userNameSvn, string passwordUserSvn, string dMTestPath, string dMTestSVNPath, string firmwareRevision, string partNumber, string serialNumber, string logMessage, out string errorMessage)
+        public static bool UploadFile(string svnRepo, string userNameSvn, string passwordUserSvn, string dMTestPath, string dMTestSVNPath, string firmwareRevision, string partNumber, string serialNumber, string logMessage, out string testResultLocation, out string errorMessage)
         {
             errorMessage = string.Empty;
+            testResultLocation = string.Empty;
             using (SvnClient client = new SvnClient())
             {
                 try
@@ -33,6 +34,7 @@ namespace TestTracker.Core.Utils
 
                     var folderName = "DMTest" + DateTime.UtcNow.ToString("MMMMddyyyy-hh-mm-ss");
                     string destinationPath = string.Format(@"{0}\{1}\{2}\{3}\", dMTestSVNPath, firmwareRevision, partNumber, serialNumber);
+                    testResultLocation = destinationPath + folderName;
                     var listFile = Directory.GetFiles(@" " + dMTestPath + " ", "*.*", SearchOption.AllDirectories).ToList();
 
                     if (folder.Exists && listFile.Any())
@@ -41,7 +43,7 @@ namespace TestTracker.Core.Utils
                         {
                             Directory.CreateDirectory(destinationPath);
                         }
-                        Directory.Move(dMTestPath, destinationPath + folderName);
+                        Directory.Move(dMTestPath, testResultLocation);
                     }
                     else
                     {

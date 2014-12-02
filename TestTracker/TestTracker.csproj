@@ -109,7 +109,13 @@
     <Compile Include="Controls\Editor\TestQueueEditor.xaml.cs">
       <DependentUpon>TestQueueEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Grid\DocumentViewerDataGrid.xaml.cs">
+      <DependentUpon>DocumentViewerDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Grid\TestQueueViewModel.cs" />
+    <Compile Include="Controls\Grid\TestUnitResultDataGrid.xaml.cs">
+      <DependentUpon>TestUnitResultDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Loading\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
     </Compile>
@@ -122,9 +128,13 @@
     <Compile Include="Controls\Messagebox\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewWindows\TestResultWindow.xaml.cs">
+      <DependentUpon>TestResultWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataConverter\ForeBackgroundConverter.cs" />
     <Compile Include="DataConverter\ShortScriptNameConverter.cs" />
     <Compile Include="DataConverter\TestStatusConverter.cs" />
+    <Compile Include="DataConverter\TestStatusLabelForegroundConverter.cs" />
     <Compile Include="HandleEvents\CustomEventArgs.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Themes\WindowResizer.cs" />
@@ -132,6 +142,14 @@
       <DependentUpon>WindowStyle.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Editor\TestQueueEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Grid\DocumentViewerDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Grid\TestUnitResultDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Messagebox\MessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewWindows\TestResultWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,7 +323,6 @@
       <Name>TestTracker.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

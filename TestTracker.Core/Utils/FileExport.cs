@@ -190,19 +190,19 @@ namespace TestTracker.Core.Utils
                     }
                     else if (compAttr.Contains("DeviceName".ToUpper()))
                     {
-                        testResult.DeviceName = copyAttr.Replace("Device name : ", "").Replace(STR_SEPARATING, "").Trim();
+                        testResult.DeviceName = copyAttr.Replace("DEVICE NAME: ", "").Replace("Device name : ", "").Replace(STR_SEPARATING, "").Trim();
                     }
                     else if (compAttr.Contains("HBANAME".ToUpper()))
                     {
-                        testResult.HBAName = copyAttr.Replace("Hba Name :", "").Replace(STR_SEPARATING, "").Trim();
+                        testResult.HBAName = copyAttr.Replace("HBA NAME: ", "").Replace("Hba Name :", "").Replace(STR_SEPARATING, "").Trim();
                     }
                     else if (compAttr.Contains("TotalLba".ToUpper()))
                     {
-                        testResult.TotalLBA = copyAttr.Replace("Total LBA = ", "").Replace(STR_SEPARATING, "").Trim();
+                        testResult.TotalLBA = copyAttr.Replace("Total LBA:", "").Replace("Total LBA = ", "").Replace(STR_SEPARATING, "").Trim();
                     }
                     else if (compAttr.Contains("Capacity".ToUpper()))
                     {
-                        testResult.Capacity = copyAttr.Replace("Total LBA = ", "").Replace(STR_SEPARATING, "").Trim();
+                        testResult.Capacity = copyAttr.Replace("Capacity:", "").Replace("Capacity =", "").Replace("Capacity  =", "").Replace("Capacity: ", "").Replace(STR_SEPARATING, "").Trim();
                     }
                     else if (compAttr.Contains("ScriptStartDate".ToUpper()))
                     {

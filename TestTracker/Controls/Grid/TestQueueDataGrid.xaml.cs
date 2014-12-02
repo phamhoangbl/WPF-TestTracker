@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TestTracker.Core.Data.Model;
 using TestTracker.Core.Utils;
 using TestTracker.HandleEvents;
+using TestTracker.Controls.NewWindows;
 
 namespace TestTracker.Controls.Grid
 {
@@ -67,17 +68,22 @@ namespace TestTracker.Controls.Grid
             }
         }
 
-        private void ViewTestResult_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected void View_Click(object sender, RoutedEventArgs e)
         {
-            if (e.ClickCount == 1) //Note that this is a lie, this does not check for a "real" click
-            {
-                TestQueueDataGrid ui = new TestQueueDataGrid();
-                MainWindow newWindow = new MainWindow();
-                newWindow.Content = ui;
-                newWindow.Show();
-            }
-        }
+            var button = sender as Button;
+            var commandArg = button.CommandParameter;
 
+            var testQueueId = int.Parse(commandArg.ToString());
+            TestResultWindow testResultWin = new TestResultWindow(testQueueId);
+            MainWindow newWindow = new MainWindow();
+            newWindow.Content = testResultWin;
+            newWindow.Width = 1190;
+            newWindow.Height = 800;
+            newWindow.Title = "Test Result";
+            newWindow.HorizontalAlignment = HorizontalAlignment.Center;
+            newWindow.VerticalAlignment = VerticalAlignment.Center;
+            newWindow.Show();
+        }
     }
 
 }

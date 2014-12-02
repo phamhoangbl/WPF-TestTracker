@@ -101,8 +101,8 @@ namespace TestTracker.ConsoleApp
                         string usernameSVN = System.Configuration.ConfigurationManager.AppSettings["usernameSVN"];
                         string userPasswordSVN = System.Configuration.ConfigurationManager.AppSettings["userPasswordSVN"];
 
-                        string errorMessage;
-                        bool isUploaded = SvnSharpClient.UploadFile(repoSVNConnectionString, usernameSVN, userPasswordSVN, STR_DMTEST_PATH, STR_DMTEST_SVN_PATH, firmwareRevision.FWRevision.Trim(), modelNumber.ModelNumber.Trim(), serialNumber.SerialNumber.Trim(), string.Format("Add File excels and logs, script name: {0}, {1}", scriptName, DateTime.UtcNow.ToString("f")), out errorMessage);
+                        string testResultLocation, errorMessage;
+                        bool isUploaded = SvnSharpClient.UploadFile(repoSVNConnectionString, usernameSVN, userPasswordSVN, STR_DMTEST_PATH, STR_DMTEST_SVN_PATH, firmwareRevision.FWRevision.Trim(), modelNumber.ModelNumber.Trim(), serialNumber.SerialNumber.Trim(), string.Format("Add File excels and logs, script name: {0}, {1}", scriptName, DateTime.UtcNow.ToString("f")), out testResultLocation, out errorMessage);
 
                         if (isUploaded)
                         {
@@ -121,6 +121,24 @@ namespace TestTracker.ConsoleApp
                                 testUnitResult.TestQueueId = int.Parse(testQueueId);
                                 testUnitResult.CreatedDateUtc = DateTime.UtcNow;
                                 testUnitResultRepository.InsertTestUnitResult(testUnitResult);
+                            }
+
+                            //store phycical file result 
+                            if (Directory.Exists(testResultLocation))
+                            {
+                                var listFileName = Directory.GetFiles(@" " + testResultLocation + " ", "*.*", SearchOption.AllDirectories).ToList();
+                                if (listFileName.Any())
+                                {
+                                    TestResultDocumentRepository documentRepo = new TestResultDocumentRepository();
+                                    foreach (var fileName in listFileName)
+                                    {
+                                        TestResultDocument document = new TestResultDocument();
+                                        document.FolderLocation = testResultLocation;
+                                        document.TestQueueId = int.Parse(testQueueId);
+                                        document.FileName = fileName.Trim();
+                                        documentRepo.InsertTestResultDocument(document);
+                                    }
+                                }
                             }
 
                             testQueueRepository.UpdateTestQueueStatus(int.Parse(testQueueId), EnumTestStatus.Completed);

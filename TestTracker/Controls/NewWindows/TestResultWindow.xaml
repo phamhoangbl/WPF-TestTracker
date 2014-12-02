@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="TestTracker.Controls.NewWindows.TestResultWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:grid="clr-namespace:TestTracker.Controls.Grid"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1070">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="540"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Canvas HorizontalAlignment="Left" Width="0">
+            <StackPanel Canvas.Top="5" Canvas.Left="20">
+                <Label Content="TEST RESULT "  Margin="4,4,4,4" FontSize="26"/>
+                <DockPanel>
+                    <Label Content="Script name: " HorizontalAlignment="Left" Margin="10,25,0,5" VerticalAlignment="Top" />
+                    <Label x:Name="_scriptNameLabel" Content="Script name" HorizontalAlignment="Left" Margin="10,25,0,5" VerticalAlignment="Top" Foreground="Yellow" />
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Total Tests: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top"/>
+                    <Label x:Name="_totalTestResultLabel" Content="Device name" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="Yellow"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Device name: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top"/>
+                    <Label x:Name="_deviceNameLabel" Content="Device name" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Serial number: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top"/>
+                    <Label x:Name="_serialNumberLabel" Content="Serial number" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="FW Revision: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top"/>
+                    <Label x:Name="_FWRevisionLabel" Content="FW Revision" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="HBA name: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" />
+                    <Label x:Name="_hBANameLabel" Content="HBA name" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Total LBA: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" />
+                    <Label x:Name="_totalLBALabel" Content="Total LBA" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Capacity: " HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" />
+                    <Label x:Name="_capacityLabel" Content="Capacity" HorizontalAlignment="Left"  Margin="10,5,0,5" VerticalAlignment="Top" Foreground="DarkGoldenrod"/>
+                </DockPanel>
+                <DockPanel Margin="10, 10, 5, 10">
+                </DockPanel>
+            </StackPanel>
+            <StackPanel Canvas.Top="290" Canvas.Left="29">
+                <grid:DocumentViewerDataGrid x:Name="_documentViewerDataGrid" Width="495" Height="449" />
+            </StackPanel>
+        </Canvas>
+        <Canvas HorizontalAlignment="right" Width="0">
+            <StackPanel Canvas.Top="70">
+                <grid:TestUnitResultDataGrid x:Name="_testUnitResultDataGrid" />
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</UserControl>

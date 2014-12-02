@@ -114,26 +114,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="15360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="15872">
       <assemblyIdentity name="TestTracker.ConsoleApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JY2MaT6ytN1n8fJBu5SaoLgwFXRbwE9AEiNW8Ll4ZVI=</dsig:DigestValue>
+        <dsig:DigestValue>kQ7CHh51NeOb4HWmRtYDx1XBtghoGg+aRFzqK3OADr0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="42496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.Core.dll" size="45568">
       <assemblyIdentity name="TestTracker.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bTOertb12lOCAf6OXKLYJ5KzPWty5p9SpGxzcHxz8v4=</dsig:DigestValue>
+        <dsig:DigestValue>g7OLHUUjzF5ZVEosM4lKAzXC92ZUAUcV9jIXsZ7mkhc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -152,7 +152,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9SbFi3/A9K+vHA43wTfSNaWIbLHVeO+8CZULehKUo7w=</dsig:DigestValue>
+      <dsig:DigestValue>X8FYICasRcsBBesDT38dzMr9jsmqSoewO19YNGZHrGE=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
