@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="15872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TestTracker.ConsoleApp.exe" size="16384">
       <assemblyIdentity name="TestTracker.ConsoleApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kQ7CHh51NeOb4HWmRtYDx1XBtghoGg+aRFzqK3OADr0=</dsig:DigestValue>
+        <dsig:DigestValue>QhNUjNZjCMHmtkE14HdtKq/B1YMAlLeLxhz1Z6iUYMk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -133,7 +133,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>g7OLHUUjzF5ZVEosM4lKAzXC92ZUAUcV9jIXsZ7mkhc=</dsig:DigestValue>
+        <dsig:DigestValue>meB80/qafMdIohYlroK4K2YckUovbD/1DQ2BC9X3PAw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -146,13 +146,13 @@
       <dsig:DigestValue>tC4d10Klu8R9nBnOm880BdcpiS0CDJpxAkxw4wcFlyY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TestTracker.ConsoleApp.exe.config" size="2712">
+  <file name="TestTracker.ConsoleApp.exe.config" size="2682">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>X8FYICasRcsBBesDT38dzMr9jsmqSoewO19YNGZHrGE=</dsig:DigestValue>
+      <dsig:DigestValue>cvXf+ETFlE2Hlcp7kzLpauOS29ZlBmNjOXcrzWEoyxc=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

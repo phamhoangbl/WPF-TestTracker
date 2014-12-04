@@ -11,6 +11,7 @@ namespace TestTracker.Core.Utils
 {
     public static class SvnSharpClient
     {
+        private const string _STR_STATA = "SATA"; 
         public static bool UploadFile(string svnRepo, string userNameSvn, string passwordUserSvn, string dMTestPath, string dMTestSVNPath, string firmwareRevision, string partNumber, string serialNumber, string logMessage, out string testResultLocation, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -33,7 +34,7 @@ namespace TestTracker.Core.Utils
                     var folder = new DirectoryInfo(dMTestPath);
 
                     var folderName = "DMTest" + DateTime.UtcNow.ToString("MMMMddyyyy-hh-mm-ss");
-                    string destinationPath = string.Format(@"{0}\{1}\{2}\{3}\", dMTestSVNPath, firmwareRevision, partNumber, serialNumber);
+                    string destinationPath = string.Format(@"{0}\{1}\{2}\{3}\{4}\", dMTestSVNPath, _STR_STATA, firmwareRevision, partNumber, serialNumber);
                     testResultLocation = destinationPath + folderName;
                     var listFile = Directory.GetFiles(@" " + dMTestPath + " ", "*.*", SearchOption.AllDirectories).ToList();
 

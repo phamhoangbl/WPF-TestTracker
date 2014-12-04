@@ -10,6 +10,8 @@
             <StackPanel Canvas.Top="10">
                 <Label Content="Platform" HorizontalAlignment="Left" Margin="4,4,4,4" VerticalAlignment="Top"/>
                 <ComboBox Name="_platformCombobox" Margin="4" Width="276" SelectedValuePath="Tag" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="INTEL (A) (SATA) VID:0x8086 DID:0x1E02" Tag="8086-1E02" />
+                    <ComboBoxItem Content="JMicron (R) VID:0x197B DID:0x2363" Tag="197B-2363" />
                     <ComboBoxItem Content="INTEL 6 Series(A) VID:0x8086 DID:0x1C02" Tag="8086-1C02" />
                     <ComboBoxItem Content="INTEL 5 Series(A) VID:0x8086 DID:0x3B22" Tag="8086-3B22" />
                     <ComboBoxItem Content="INTEL ICH10(A) VID:0x8086 DID:0x3A22" Tag="8086-3A22" />

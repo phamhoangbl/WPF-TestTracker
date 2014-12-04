@@ -12,6 +12,7 @@
         <local:TestStatusConverter x:Key="ToTestStatusString" />
         <local:ShortScriptNameConverter x:Key="ToShortScriptNameConverter" />
         <local:ForeBackgroundConverter x:Key="ToForeBackgroundConverter" />
+        <local:TestStatusVisibilityConverter x:Key="ToTestStatusVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <DataGrid x:Name="_testQueueDataGrid" Background="#FF393939" BorderThickness="0" BorderBrush="DarkCyan"
@@ -47,7 +48,7 @@
                 <DataGridTemplateColumn Header="View Test Result">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="View_Click" CommandParameter="{Binding TestQueueId}" Content="View" />
+                            <Button Click="View_Click" CommandParameter="{Binding TestQueueId}" Visibility="{Binding TestStatusId, Converter={StaticResource ToTestStatusVisibilityConverter}}" Content="View" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

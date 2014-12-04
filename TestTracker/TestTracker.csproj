@@ -29,7 +29,7 @@
     <PublisherName>John Hoang</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>73</ApplicationRevision>
+    <ApplicationRevision>88</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -135,6 +135,7 @@
     <Compile Include="DataConverter\ShortScriptNameConverter.cs" />
     <Compile Include="DataConverter\TestStatusConverter.cs" />
     <Compile Include="DataConverter\TestStatusLabelForegroundConverter.cs" />
+    <Compile Include="DataConverter\TestStatusVisibilityConverter.cs" />
     <Compile Include="HandleEvents\CustomEventArgs.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Themes\WindowResizer.cs" />

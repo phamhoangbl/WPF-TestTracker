@@ -64,7 +64,6 @@ namespace TestTracker
             _logger = LogManager.GetCurrentClassLogger();
             _isValidRunDMMaster = true;
             _stopwatch = new Stopwatch();
-            _runTestButton.IsEnabled = false;
             SetUpTimer();
         }
 
@@ -133,7 +132,7 @@ namespace TestTracker
             ToogleExapnd();
         }
 
-        protected void RunTest_Click(object sender, RoutedEventArgs e)
+        protected void CreateTest_Click(object sender, RoutedEventArgs e)
         {
             _isClickRunTest = true;
             _isValidRunDMMaster = true;
@@ -141,17 +140,22 @@ namespace TestTracker
             LoadingAdorner.IsAdornerVisible = true;
             _mainForm.IsEnabled = false;
             _dispatcherTimer.Start();
-
-            _runTestButton.IsEnabled = false;
-            _stopTestButton.IsEnabled = true;
         }
 
-        protected void StopTest_Click(object sender, RoutedEventArgs e)
+        protected void ToogleRunTest_Click(object sender, RoutedEventArgs e)
         {
-            _dispatcherTimer.Stop();
-
-            _stopTestButton.IsEnabled = false;
-            _runTestButton.IsEnabled = true;
+            //toogle button Stop]
+            var toogleRunTestButton = sender as System.Windows.Controls.Button;
+            if (toogleRunTestButton.Content.ToString() == "Stop")
+            {
+                _dispatcherTimer.Stop();
+                toogleRunTestButton.Content = "Run";
+            }
+            else if (toogleRunTestButton.Content.ToString() == "Run")
+            {
+                _dispatcherTimer.Start();
+                toogleRunTestButton.Content = "Stop";
+            }
         }
 
         #endregion

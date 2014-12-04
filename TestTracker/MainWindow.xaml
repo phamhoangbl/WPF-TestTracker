@@ -67,6 +67,8 @@
                         <StackPanel>
                             <Label Content="Platform" HorizontalAlignment="Left" Margin="4,4,4,4" VerticalAlignment="Top"/>
                             <ComboBox Name="_platformCombobox" Margin="4" Width="276" SelectedValuePath="Tag" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="INTEL (A) (SATA) VID:0x8086 DID:0x1E02" Tag="8086-1E02" />
+                                <ComboBoxItem Content="JMicron (R) VID:0x197B DID:0x2363" Tag="197B-2363" />
                                 <ComboBoxItem Content="INTEL 6 Series(A) VID:0x8086 DID:0x1C02" Tag="8086-1C02" />
                                 <ComboBoxItem Content="INTEL 5 Series(A) VID:0x8086 DID:0x3B22" Tag="8086-3B22" />
                                 <ComboBoxItem Content="INTEL ICH10(A) VID:0x8086 DID:0x3A22" Tag="8086-3A22" />
@@ -109,8 +111,8 @@
                         </StackPanel>
                     </DockPanel>
                     <DockPanel>
-                        <Button x:Name="_runTestButton" Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Run Test" Click="RunTest_Click" />
-                        <Button x:Name="_stopTestButton" Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Stop" Click="StopTest_Click" />
+                        <Button x:Name="_createTestButton" Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Create Test" Click="CreateTest_Click" />
+                        <Button x:Name="_toogleRunTestButton" Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="4,11,4,4" IsDefault="True" Content="Stop" Click="ToogleRunTest_Click" />
                         <!--<Label Content="If the automatic process is stuck, please press the 'Data Fixer' button" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,0,0"></Label>
                         <Button Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="28" Margin="4,11,24,4" IsDefault="True" Content="Data Fixer" Click="Datafixer_Click" />-->
                     </DockPanel>

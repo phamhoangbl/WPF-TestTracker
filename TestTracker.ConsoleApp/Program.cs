@@ -24,8 +24,8 @@ namespace TestTracker.ConsoleApp
         private const string STR_NETWORK_ARE_FAIL_TITLE = "Connection failed:";
         private const string STR_WRONG_HBA_CONFIGURATION_TITLE = "DriveMaster HBA Configuration";
         private const string STR_WRONG_PORT_TITLE = "Please check if the DEVICE on the SELECTED port works well!";
-        //private const string STR_DRIVE_MASTER_TITLE = "DriveMaster";
-        private const string STR_DRIVE_MASTER_TITLE = "caption";
+        private const string STR_DRIVE_MASTER_TITLE = "DriveMaster";
+        //private const string STR_DRIVE_MASTER_TITLE = "caption";
         private const string STR_DMTEST_PATH = @"C:\DMTest";
         private const string STR_DMTEST_SVN_PATH = @"C:\DMTestSVN";
         private const string _STR_LOG_MESSAGE = "Moved file excels and logs";
@@ -219,7 +219,7 @@ namespace TestTracker.ConsoleApp
             //Assign Procesing status
             Process.Start(startinfo);
             //wait for 25 s to DM process start
-            Thread.Sleep(1000);
+            Thread.Sleep(25000);
 
             _logger.Info(string.Format(string.Format("Done call DM Master app", DateTime.UtcNow)));
 
@@ -233,24 +233,28 @@ namespace TestTracker.ConsoleApp
                     _logger.Info(string.Format(string.Format("All net work liense DM are busy {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 1;
+                    return;
                 }
                 if (theprocess.MainWindowTitle == STR_NETWORK_ARE_FAIL_TITLE)
                 {
                     _logger.Info(string.Format(string.Format("Failed to connect VPN {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 2;
+                    return;
                 }
                 if (theprocess.MainWindowTitle.Contains(STR_WRONG_HBA_CONFIGURATION_TITLE))
                 {
                     _logger.Info(string.Format(string.Format("Wrong HBA Configuration {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 3;
+                    return;
                 }
                 if (theprocess.MainWindowTitle.Contains(STR_WRONG_PORT_TITLE))
                 {
                     _logger.Info(string.Format(string.Format("Wrong HBA Configuration {0}", DateTime.UtcNow)));
                     theprocess.Kill();
                     result = 4;
+                    return;
                 }
                 
             }
@@ -260,9 +264,14 @@ namespace TestTracker.ConsoleApp
             while (!isFinished)
             {
                 Process[] processes = Process.GetProcesses();
+                if (processes.Any(x => x.MainWindowTitle.Contains(STR_ALL_NETWORK_ARE_BUSY_TITLE)))
+                {
+                    processes.FirstOrDefault(x => x.MainWindowTitle.Contains(STR_ALL_NETWORK_ARE_BUSY_TITLE)).Kill();
+                }
                 if (!processes.Any(x => x.MainWindowTitle.Contains(STR_DRIVE_MASTER_TITLE)))
                 {
                     isFinished = true;
+                    result = 0;
                 }
             }
         }
