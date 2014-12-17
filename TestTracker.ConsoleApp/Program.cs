@@ -219,7 +219,7 @@ namespace TestTracker.ConsoleApp
             //Assign Procesing status
             Process.Start(startinfo);
             //wait for 25 s to DM process start
-            Thread.Sleep(25000);
+            Thread.Sleep(30000);
 
             _logger.Info(string.Format(string.Format("Done call DM Master app", DateTime.UtcNow)));
 

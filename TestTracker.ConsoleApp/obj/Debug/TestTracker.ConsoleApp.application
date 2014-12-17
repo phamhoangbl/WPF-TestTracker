@@ -4,17 +4,17 @@
   <description asmv2:publisher="TestTracker.ConsoleApp" asmv2:product="TestTracker.ConsoleApp" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.5.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TestTracker.ConsoleApp.exe.manifest" size="9983">
+    <dependentAssembly dependencyType="install" codebase="TestTracker.ConsoleApp.exe.manifest" size="9987">
       <assemblyIdentity name="TestTracker.ConsoleApp.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HziOlKO0lNo1SBkjUxTkIDCk8qrcbrOGm2BIzCAQtyY=</dsig:DigestValue>
+        <dsig:DigestValue>9trrxtnrjV9LsRDMU/1BIHrGs9vuKJ2b7/xAfOhxlfA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -29,12 +29,13 @@
     <PublisherName>John Hoang</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>88</ApplicationRevision>
+    <ApplicationRevision>110</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsUrl>http://download.microsoft.com/download/A/8/0/A80747C3-41BD-45DF-B505-E9710D2744E0/vcredist_x64.exe</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -263,16 +264,14 @@
     <Content Include="ConsoleApp\EntityFramework.SqlServer.dll" />
     <Content Include="ConsoleApp\NLog.dll" />
     <Content Include="ConsoleApp\SharpSvn.dll" />
-    <Content Include="ConsoleApp\SharpSvn.UI.dll" />
     <Content Include="ConsoleApp\TestTracker.ConsoleApp.exe" />
     <Content Include="ConsoleApp\TestTracker.Core.dll" />
+    <Content Include="ExternalLibs\AdornedControl.dll" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ConsoleApp\NLog.config" />
-    <Content Include="ConsoleApp\TestTracker.ConsoleApp.exe.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="ConsoleApp\TestTracker.ConsoleApp.exe.config" />
     <None Include="NLog.xsd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -302,9 +301,9 @@
     <Resource Include="Resources\LoadingGIF.gif" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -324,6 +323,7 @@
       <Name>TestTracker.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

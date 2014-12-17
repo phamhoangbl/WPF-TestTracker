@@ -37,14 +37,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="SharpSvn, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpSvn.UI, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=33789aa53ca44aa9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.UI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -75,9 +67,11 @@
     <Compile Include="Utils\EnumTest.cs" />
     <Compile Include="Data\Model\TestResult.cs" />
     <Compile Include="Utils\FileExport.cs" />
-    <Compile Include="Utils\SvnSharpClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestTracker.ConsoleApp</RootNamespace>
     <AssemblyName>TestTracker.ConsoleApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\johnhoang\Desktop\abc\</PublishUrl>
@@ -27,6 +27,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,15 +38,18 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>1E96BB57494483EB0B303E7A65DF35C176D902B7</ManifestCertificateThumbprint>
@@ -79,13 +83,12 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="SharpSvn, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
+    <Reference Include="SharpSvn, Version=1.8991.3368.110, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.dll</HintPath>
+      <HintPath>..\packages\SharpSvn.1.9-x64.1.8991.3368.110\lib\net40\SharpSvn.dll</HintPath>
     </Reference>
-    <Reference Include="SharpSvn.UI, Version=1.8010.3368.58, Culture=neutral, PublicKeyToken=33789aa53ca44aa9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpSvn.1.8-x86.1.8010.3368.58\lib\net40\SharpSvn.UI.dll</HintPath>
+    <Reference Include="SharpSvn.UI">
+      <HintPath>..\packages\SharpSvn.1.9-x64.1.8991.3368.110\lib\net40\SharpSvn.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -103,6 +106,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SvnSharpClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
